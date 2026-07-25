@@ -16,6 +16,12 @@ These notes preserve the primary sources used to build the first curated version
 
 - Harness VLA project: https://harnessvla.github.io/
 - Harness VLA paper, arXiv:2607.08448v3: https://arxiv.org/abs/2607.08448
+- Guava project: https://guava-harness.github.io/
+- Guava paper, arXiv:2606.18363: https://arxiv.org/abs/2606.18363
+- ASPIRE project: https://research.nvidia.com/labs/gear/aspire/
+- ASPIRE paper, arXiv:2607.00272: https://arxiv.org/abs/2607.00272
+- GaP project: https://graph-robots.github.io/gap/
+- GaP paper, arXiv:2607.05369: https://arxiv.org/abs/2607.05369
 - Microsoft, "Agent harnesses": https://learn.microsoft.com/en-us/agent-framework/agents/harness
 - Allen Institute for AI, vla-evaluation-harness: https://github.com/allenai/vla-evaluation-harness
 - vla-eval paper, arXiv:2603.13966: https://arxiv.org/abs/2603.13966
@@ -40,6 +46,10 @@ These notes preserve the primary sources used to build the first curated version
 - RDT-1B: https://github.com/thu-ml/RoboticsDiffusionTransformer
 - RoboVLMs: https://github.com/Robot-VLAs/RoboVLMs
 - Octo: https://github.com/octo-models/octo
+- InternVLA-A1 project: https://internrobotics.github.io/internvla-a1.github.io/
+- InternVLA-A1 code: https://github.com/InternRobotics/InternVLA-A-series/tree/InternVLA-A1
+- InternVLA-A1 weights: https://huggingface.co/InternRobotics/InternVLA-A1-3B
+- InternVLA-A1 paper, arXiv:2601.02456v2: https://arxiv.org/abs/2601.02456
 
 ### Partial and closed frontier systems
 
@@ -85,11 +95,15 @@ These notes preserve the primary sources used to build the first curated version
 6. Current evaluation is strongest in simulation. Comparable multi-site real-robot evaluation remains an open infrastructure problem.
 7. World models, embodied reasoning models, and hierarchical planner/policy/controller systems are converging, but they operate at different time scales and should remain separately observable.
 8. Harness VLA provides a direct robot-manipulation example of this convergence: a memory-guided coding agent orchestrates a fixed primitive library and invokes a frozen VLA only for contact-rich local phases, extending its operating range without fine-tuning.
+9. Guava, ASPIRE, and GaP demonstrate three distinct external-harness strategies: model-agnostic iterative tool use, continual skill discovery from validated repairs, and simulation-refined graph policies.
+10. InternVLA-A1 is an important comparison point rather than an external harness: it internalizes understanding, world-model-style visual foresight, and flow-matching action generation inside a unified model.
 
 ## Limitations
 
 - Upstream projects change rapidly; licensing and access must be rechecked before use.
 - Harness VLA was available as an arXiv v3 preprint and project page, but no public code repository was linked when checked on 2026-07-25.
+- Guava and ASPIRE project pages marked code as forthcoming when checked on 2026-07-25.
+- GaP's paper and project page described public code and data, but their reproducibility was not independently tested.
 - Vendor-reported results and benchmark scores were not treated as directly comparable.
 - Inclusion means the project is useful to study or implement, not that its safety or performance claims were independently validated.
 - Search results were used to discover projects, but the curated descriptions prefer the primary sources listed above.
