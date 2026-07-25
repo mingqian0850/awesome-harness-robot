@@ -14,6 +14,8 @@ These notes preserve the primary sources used to build the first curated version
 
 ### Harness framing and evaluation
 
+- Harness VLA project: https://harnessvla.github.io/
+- Harness VLA paper, arXiv:2607.08448v3: https://arxiv.org/abs/2607.08448
 - Microsoft, "Agent harnesses": https://learn.microsoft.com/en-us/agent-framework/agents/harness
 - Allen Institute for AI, vla-evaluation-harness: https://github.com/allenai/vla-evaluation-harness
 - vla-eval paper, arXiv:2603.13966: https://arxiv.org/abs/2603.13966
@@ -82,10 +84,12 @@ These notes preserve the primary sources used to build the first curated version
 5. Cross-embodiment transfer requires explicit embodiment metadata and normalization; a generalist checkpoint is not plug-and-play.
 6. Current evaluation is strongest in simulation. Comparable multi-site real-robot evaluation remains an open infrastructure problem.
 7. World models, embodied reasoning models, and hierarchical planner/policy/controller systems are converging, but they operate at different time scales and should remain separately observable.
+8. Harness VLA provides a direct robot-manipulation example of this convergence: a memory-guided coding agent orchestrates a fixed primitive library and invokes a frozen VLA only for contact-rich local phases, extending its operating range without fine-tuning.
 
 ## Limitations
 
 - Upstream projects change rapidly; licensing and access must be rechecked before use.
+- Harness VLA was available as an arXiv v3 preprint and project page, but no public code repository was linked when checked on 2026-07-25.
 - Vendor-reported results and benchmark scores were not treated as directly comparable.
 - Inclusion means the project is useful to study or implement, not that its safety or performance claims were independently validated.
 - Search results were used to discover projects, but the curated descriptions prefer the primary sources listed above.
