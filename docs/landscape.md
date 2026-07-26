@@ -1,6 +1,6 @@
 # Landscape: Agent Harnesses, VLAs, and Robot Foundation Models
 
-Last verified: **2026-07-25**.
+Last verified: **2026-07-26**.
 
 This note explains the development arc behind the links in the main list. Dates refer to public releases or papers, not necessarily the start of internal development.
 
@@ -12,7 +12,7 @@ This note explains the development arc behind the links in the main list. Dates 
 | 2023 | PaLM-E, RT-2, RT-X/Open X-Embodiment | Web-scale multimodal knowledge and cross-robot data were connected to control. |
 | 2024 | Octo, OpenVLA, π0, RDT-1B, CogACT | Open generalist policies diversified into token, diffusion, and flow-based action heads. |
 | 2025 | OpenVLA-OFT, SmolVLA, π0.5, GR00T N1/N1.5, Gemini Robotics, V-JEPA 2 | Efficient action chunks, open-world adaptation, humanoid policies, on-device deployment, and world-model planning moved to the foreground. |
-| 2026 | Guava, ASPIRE, GaP, Harness VLA, InternVLA-A1, vla-evaluation-harness, GR00T N1.7, MolmoAct 2, Helix 02, Gemini Robotics-ER 1.6 | The ecosystem began treating orchestration, memory, recovery, skill discovery, graph-structured policies, evaluation, world-model foresight, and reasoning/action separation as shared infrastructure. |
+| 2026 | Self-Harness, Guava, ASPIRE, GaP, Harness VLA, InternVLA-A1, vla-evaluation-harness, GR00T N1.7, MolmoAct 2, Helix 02, Gemini Robotics-ER 1.6 | The ecosystem began treating orchestration, memory, recovery, skill discovery, graph-structured policies, evaluation, world-model foresight, and the harness itself as optimization targets. |
 
 ## Architecture Trends
 
@@ -88,7 +88,15 @@ This is a useful harness pattern because it stores executable experience and fai
 
 ASPIRE and GaP broaden this idea from runtime memory to system improvement. ASPIRE admits validated repairs into a transferable skill library; GaP uses simulated rehearsals to refine a persistent graph policy before real execution. Guava demonstrates a lighter-weight alternative in which recovery emerges from an iterative observation/reasoning/tool loop. These mechanisms should not be treated as interchangeable: trace retrieval, reusable skill accumulation, graph search, and in-context replanning have different compute costs and different failure modes.
 
-### 7. Evaluation becomes a harness, not a notebook
+### 7. Harness optimization becomes regression-gated
+
+Self-Harness provides a general coding-agent example of optimizing the non-parametric system around a fixed model. It clusters verifier-grounded failure traces, asks the same target model for bounded and auditable harness edits, and promotes a candidate only if it improves one evaluation split without degrading the other. The accepted changes can affect instructions, tools, memory, runtime controls, verification, skills, or subagent structure.
+
+For robotics, this pattern belongs in an offline improvement plane rather than the live safety-critical control path. Candidate changes should run through simulation, recorded-trajectory replay, shadow evaluation, independent approval, versioned deployment, and rollback. Safety limits, permission boundaries, emergency stops, and verified low-level controllers must remain outside the editable surface.
+
+The evidence is preliminary: Self-Harness evaluates terminal agents, not robots, and uses its so-called held-out split when deciding which candidate edits to promote. Those traces are hidden from the proposer, but repeated score-based selection can still adapt to the split, so a separate untouched final test set remains necessary.
+
+### 8. Evaluation becomes a harness, not a notebook
 
 VLA results were historically difficult to compare because each model carried its own environment fork, dependency set, observation adapter, action scaling, and rollout script. The emerging pattern is:
 
@@ -111,6 +119,7 @@ The remaining gap is standardized, multi-site real-robot evaluation. Simulation 
 | World-model planning | V-JEPA 2-AC, DreamerV3 | Predicts consequences and supports explicit planning. | Model bias, planning budget, reward/goal specification. |
 | Planner plus skills | Harness VLA, Guava, ASPIRE, SayCan, ROSA, Code as Policies | Interpretable task decomposition, retry, memory, and reuse of verified or learned primitives. | Tool permissions, grounding, recovery, context drift. |
 | Graph-as-policy search | GaP | Interpretable perception/planning/control graphs refined through simulated rehearsal. | Simulator fidelity, search cost, graph validation, transfer to hardware. |
+| Self-improving harness | Self-Harness | Trace-grounded, model-specific changes promoted through regression tests while weights remain fixed. | Evaluation leakage, search cost, unsafe editable surfaces, and rollback. |
 | Unified foresight VLA | InternVLA-A1 | Joint scene understanding, future visual prediction, and continuous action generation. | Prediction error propagation, compute cost, and separating model versus harness failures. |
 | Hierarchical whole-body | Helix 02 and humanoid stacks | Matches semantic, visuomotor, and stabilization time scales. | Cross-layer contracts, failure propagation, end-to-end tracing. |
 

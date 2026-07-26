@@ -22,6 +22,8 @@ These notes preserve the primary sources used to build the first curated version
 - ASPIRE paper, arXiv:2607.00272: https://arxiv.org/abs/2607.00272
 - GaP project: https://graph-robots.github.io/gap/
 - GaP paper, arXiv:2607.05369: https://arxiv.org/abs/2607.05369
+- Self-Harness paper, arXiv:2606.09498v1: https://arxiv.org/abs/2606.09498
+- Self-Harness HTML full text: https://arxiv.org/html/2606.09498v1
 - Microsoft, "Agent harnesses": https://learn.microsoft.com/en-us/agent-framework/agents/harness
 - Allen Institute for AI, vla-evaluation-harness: https://github.com/allenai/vla-evaluation-harness
 - vla-eval paper, arXiv:2603.13966: https://arxiv.org/abs/2603.13966
@@ -97,6 +99,7 @@ These notes preserve the primary sources used to build the first curated version
 8. Harness VLA provides a direct robot-manipulation example of this convergence: a memory-guided coding agent orchestrates a fixed primitive library and invokes a frozen VLA only for contact-rich local phases, extending its operating range without fine-tuning.
 9. Guava, ASPIRE, and GaP demonstrate three distinct external-harness strategies: model-agnostic iterative tool use, continual skill discovery from validated repairs, and simulation-refined graph policies.
 10. InternVLA-A1 is an important comparison point rather than an external harness: it internalizes understanding, world-model-style visual foresight, and flow-matching action generation inside a unified model.
+11. Self-Harness demonstrates that a fixed model can mine its own recurring execution failures, propose bounded changes to its non-parametric harness, and retain changes through regression gates. It is a general coding-agent result, not evidence of safe self-modification on robots.
 
 ## Limitations
 
@@ -104,6 +107,7 @@ These notes preserve the primary sources used to build the first curated version
 - Harness VLA was available as an arXiv v3 preprint and project page, but no public code repository was linked when checked on 2026-07-25.
 - Guava and ASPIRE project pages marked code as forthcoming when checked on 2026-07-25.
 - GaP's paper and project page described public code and data, but their reproducibility was not independently tested.
+- Self-Harness was evaluated on Terminal-Bench-2.0 rather than robots, and no official code link was present when checked on 2026-07-26. Its held-out split is used to promote candidate edits, so an additional untouched test set would be needed to estimate selection-generalization cleanly.
 - Vendor-reported results and benchmark scores were not treated as directly comparable.
 - Inclusion means the project is useful to study or implement, not that its safety or performance claims were independently validated.
 - Search results were used to discover projects, but the curated descriptions prefer the primary sources listed above.
