@@ -1,6 +1,6 @@
 # Landscape: Agent Harnesses, VLAs, and Robot Foundation Models
 
-Last verified: **2026-07-26**.
+Last verified: **2026-07-27**.
 
 This note explains the development arc behind the links in the main list. Dates refer to public releases or papers, not necessarily the start of internal development.
 
@@ -12,7 +12,7 @@ This note explains the development arc behind the links in the main list. Dates 
 | 2023 | PaLM-E, RT-2, RT-X/Open X-Embodiment | Web-scale multimodal knowledge and cross-robot data were connected to control. |
 | 2024 | Octo, OpenVLA, π0, RDT-1B, CogACT | Open generalist policies diversified into token, diffusion, and flow-based action heads. |
 | 2025 | OpenVLA-OFT, SmolVLA, π0.5, GR00T N1/N1.5, Gemini Robotics, V-JEPA 2 | Efficient action chunks, open-world adaptation, humanoid policies, on-device deployment, and world-model planning moved to the foreground. |
-| 2026 | Self-Harness, Guava, ASPIRE, GaP, Harness VLA, InternVLA-A1, vla-evaluation-harness, GR00T N1.7, MolmoAct 2, Helix 02, Gemini Robotics-ER 1.6 | The ecosystem began treating orchestration, memory, recovery, skill discovery, graph-structured policies, evaluation, world-model foresight, and the harness itself as optimization targets. |
+| 2026 | Self-Harness, Guava, ASPIRE, GaP, Harness VLA, Physical Agency, InternVLA-A1, Robot-Factored World Models, ViTacWorld, vla-evaluation-harness | The ecosystem began treating orchestration, memory, recovery, skill discovery, graph-structured policies, embodiment-aware world-model interfaces, evaluation, and the harness itself as optimization targets. |
 
 ## Architecture Trends
 
@@ -62,6 +62,8 @@ Robot demonstrations are scarce and fragmented. Current approaches combine:
 
 Human video does not contain robot actions, so latent-action learning, retargeting, annotation, or staged pretraining is required.
 
+Robot-Factored World Models makes this translation boundary explicit. Instead of asking a video model to infer how a raw command becomes robot motion—or conditioning on future logged states that leak the interaction outcome—it rolls the command through the known controller and kinematics, renders the nominal trajectory through the URDF, and presents that geometry to the world model. ViTacWorld takes a complementary sensory route by predicting synchronized vision and touch, then using imagined rollouts for contact-policy augmentation and pre-deployment evaluation. In both cases, the harness owns the action interface, geometry, calibration, and rollout protocol around the learned predictor.
+
 ### 5. Hierarchies return
 
 End-to-end pixels-to-actions remains attractive, but deployed systems increasingly use multiple rates and levels:
@@ -74,6 +76,8 @@ End-to-end pixels-to-actions remains attractive, but deployed systems increasing
 This is not a retreat from learning. It is a recognition that language reasoning, visuomotor prediction, contact stabilization, and safety have different data, latency, and verification requirements.
 
 Harness VLA makes this boundary explicit at the manipulation-policy level. Its agent keeps semantic re-grounding, non-contact movement, re-staging, retries, and memory outside a frozen VLA; the VLA is invoked as a local contact-rich primitive. The contribution is therefore not another base policy but a method for extending a policy's operating range through orchestration and execution feedback.
+
+Physical Agency names and measures the orchestration gap between frozen motor skills used alone and the same skills inside a closed-loop planner. Its Pigey orchestrator decomposes goals, invokes either VLA policies or parameterized skills, verifies low-level observations, and recovers without policy post-training. FORGE-plus demonstrates a narrower safety-oriented hierarchy: a frozen text LLM may choose a force budget and recovery maneuver, but the deterministic controller owns enforcement and recovery cannot raise the ceiling.
 
 The surrounding 2026 systems explore different harness boundaries. Guava isolates three reusable ingredients—iterative perception–reasoning–action, semantic action abstractions, and multimodal observations—and tests whether that interface transfers across reasoning-model scales. ASPIRE grows a code-as-policy skill library from validated repairs. GaP represents policies as directed graphs assembled by multiple coding agents, then searches graph structures and parameters in generated simulation. InternVLA-A1 takes the complementary model-centric route: it internalizes scene understanding, visual foresight, and flow-matching action generation in one Mixture-of-Transformers rather than placing those capabilities in an external agent harness.
 
@@ -116,9 +120,10 @@ The remaining gap is standardized, multi-site real-robot evaluation. Simulation 
 | Autoregressive action tokens | OpenVLA, RT-1/2, π0-FAST | Reuses language-model training and decoding machinery. | Decode latency, token/action calibration, compounding errors. |
 | Continuous regression | OpenVLA-OFT | Simple, fast, deterministic action chunks. | Median-mode behavior and limited multimodality. |
 | Diffusion / flow matching | π0/π0.5, CogACT, GR00T, SmolVLA, MolmoAct 2 | Expressive continuous action distributions. | Denoising latency, stochasticity, chunk consistency. |
-| World-model planning | V-JEPA 2-AC, DreamerV3 | Predicts consequences and supports explicit planning. | Model bias, planning budget, reward/goal specification. |
-| Planner plus skills | Harness VLA, Guava, ASPIRE, SayCan, ROSA, Code as Policies | Interpretable task decomposition, retry, memory, and reuse of verified or learned primitives. | Tool permissions, grounding, recovery, context drift. |
+| World-model planning | V-JEPA 2-AC, DreamerV3, Robot-Factored World Models, ViTacWorld | Predicts consequences and supports explicit planning, augmentation, or policy evaluation. | Model bias, conditioning leakage, geometry/calibration drift, and planning budget. |
+| Planner plus skills | Physical Agency, Harness VLA, Guava, ASPIRE, SayCan, ROSA, Code as Policies | Interpretable task decomposition, retry, memory, and reuse of verified or learned primitives. | Tool permissions, grounding, recovery, context drift. |
 | Graph-as-policy search | GaP | Interpretable perception/planning/control graphs refined through simulated rehearsal. | Simulator fidelity, search cost, graph validation, transfer to hardware. |
+| Safety-bounded supervisor | FORGE-plus | Keeps semantic force-budget and recovery selection above immutable low-level enforcement. | Simulation-only evidence, force-model mismatch, and unsafe editable limits. |
 | Self-improving harness | Self-Harness | Trace-grounded, model-specific changes promoted through regression tests while weights remain fixed. | Evaluation leakage, search cost, unsafe editable surfaces, and rollback. |
 | Unified foresight VLA | InternVLA-A1 | Joint scene understanding, future visual prediction, and continuous action generation. | Prediction error propagation, compute cost, and separating model versus harness failures. |
 | Hierarchical whole-body | Helix 02 and humanoid stacks | Matches semantic, visuomotor, and stabilization time scales. | Cross-layer contracts, failure propagation, end-to-end tracing. |
