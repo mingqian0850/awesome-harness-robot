@@ -1,6 +1,6 @@
 # Landscape: Agent Harnesses, VLAs, and Robot Foundation Models
 
-Last verified: **2026-07-27**.
+Last verified: **2026-07-31**.
 
 This note explains the development arc behind the links in the main list. Dates refer to public releases or papers, not necessarily the start of internal development.
 
@@ -12,7 +12,7 @@ This note explains the development arc behind the links in the main list. Dates 
 | 2023 | PaLM-E, RT-2, RT-X/Open X-Embodiment | Web-scale multimodal knowledge and cross-robot data were connected to control. |
 | 2024 | Octo, OpenVLA, π0, RDT-1B, CogACT | Open generalist policies diversified into token, diffusion, and flow-based action heads. |
 | 2025 | OpenVLA-OFT, SmolVLA, π0.5, GR00T N1/N1.5, Gemini Robotics, V-JEPA 2 | Efficient action chunks, open-world adaptation, humanoid policies, on-device deployment, and world-model planning moved to the foreground. |
-| 2026 | Self-Harness, Guava, ASPIRE, GaP, Harness VLA, Physical Agency, InternVLA-A1, Robot-Factored World Models, ViTacWorld, vla-evaluation-harness | The ecosystem began treating orchestration, memory, recovery, skill discovery, graph-structured policies, embodiment-aware world-model interfaces, evaluation, and the harness itself as optimization targets. |
+| 2026 | Self-Harness, Guava, ASPIRE, GaP, Harness VLA, Physical Agency, RoboBRIDGE, Embodied Agents Take Control, HERO, CheckVLA, InternVLA-A1, TurboVLA, Robot-Factored World Models, ViTacWorld, World Action Planner, VisualPatchWorld, vla-evaluation-harness | The ecosystem began treating orchestration, memory, recovery, skill discovery, runtime verification, planner-facing world models, efficient deployment, evaluation, and the harness itself as optimization targets. |
 
 ## Architecture Trends
 
@@ -79,6 +79,8 @@ Harness VLA makes this boundary explicit at the manipulation-policy level. Its a
 
 Physical Agency names and measures the orchestration gap between frozen motor skills used alone and the same skills inside a closed-loop planner. Its Pigey orchestrator decomposes goals, invokes either VLA policies or parameterized skills, verifies low-level observations, and recovers without policy post-training. FORGE-plus demonstrates a narrower safety-oriented hierarchy: a frozen text LLM may choose a force budget and recovery maneuver, but the deterministic controller owns enforcement and recovery cannot raise the ceiling.
 
+RoboBRIDGE makes the deployment boundary more explicit through five replaceable modules: Monitor, Perceptor, Planner, Controller, and Robot Interface. Unlike wrappers centered on one recovery technique, it treats asynchronous perception, hierarchical recovery, embodiment adaptation, and policy selection as coordinated runtime services. Embodied Agents Take Control probes an even thinner interface: general software-agent harnesses receive a camera and discrete actions, revealing that model capability, optional waypoint tools, context growth, and latency can matter as much as bespoke embodied workflow code.
+
 The surrounding 2026 systems explore different harness boundaries. Guava isolates three reusable ingredients—iterative perception–reasoning–action, semantic action abstractions, and multimodal observations—and tests whether that interface transfers across reasoning-model scales. ASPIRE grows a code-as-policy skill library from validated repairs. GaP represents policies as directed graphs assembled by multiple coding agents, then searches graph structures and parameters in generated simulation. InternVLA-A1 takes the complementary model-centric route: it internalizes scene understanding, visual foresight, and flow-matching action generation in one Mixture-of-Transformers rather than placing those capabilities in an external agent harness.
 
 ### 6. Memory moves from prompt history to execution knowledge
@@ -91,6 +93,8 @@ Harness VLA separates two forms of operational memory:
 This is a useful harness pattern because it stores executable experience and failure boundaries rather than relying only on an ever-growing conversation transcript. The paper is a July 2026 preprint; its reported results should be treated under the authors' protocols, and no public code repository was linked as of 2026-07-25.
 
 ASPIRE and GaP broaden this idea from runtime memory to system improvement. ASPIRE admits validated repairs into a transferable skill library; GaP uses simulated rehearsals to refine a persistent graph policy before real execution. Guava demonstrates a lighter-weight alternative in which recovery emerges from an iterative observation/reasoning/tool loop. These mechanisms should not be treated as interchangeable: trace retrieval, reusable skill accumulation, graph search, and in-context replanning have different compute costs and different failure modes.
+
+HERO adds a consolidation path: heuristic reasoning and exemplar reuse bootstrap behavior from autonomous interaction, while recurring experience is converted into faster closed-loop visuomotor policies. This couples data collection, capability scheduling, and policy learning inside one improvement loop, so its safety case depends on which environments may be explored, how exemplars are admitted, and how consolidated policies are regression-tested.
 
 ### 7. Harness optimization becomes regression-gated
 
@@ -113,6 +117,8 @@ VLA results were historically difficult to compare because each model carried it
 
 The remaining gap is standardized, multi-site real-robot evaluation. Simulation success is useful for regression testing but is not a substitute for physical robustness.
 
+CheckVLA illustrates how evaluation logic can also become an online runtime service. It compares observed evolution with an action-conditioned world-model reference, calibrates when to intervene, and rewrites only the suffix that remains executable after inference latency. Its current RoboCasa365 evidence is simulation-only, but the separation between action proposal, execution evidence, verifier, and repair is a reusable harness pattern.
+
 ## Implementation Families
 
 | Family | Examples | Strengths | Common harness concern |
@@ -120,8 +126,9 @@ The remaining gap is standardized, multi-site real-robot evaluation. Simulation 
 | Autoregressive action tokens | OpenVLA, RT-1/2, π0-FAST | Reuses language-model training and decoding machinery. | Decode latency, token/action calibration, compounding errors. |
 | Continuous regression | OpenVLA-OFT | Simple, fast, deterministic action chunks. | Median-mode behavior and limited multimodality. |
 | Diffusion / flow matching | π0/π0.5, CogACT, GR00T, SmolVLA, MolmoAct 2 | Expressive continuous action distributions. | Denoising latency, stochasticity, chunk consistency. |
-| World-model planning | V-JEPA 2-AC, DreamerV3, Robot-Factored World Models, ViTacWorld | Predicts consequences and supports explicit planning, augmentation, or policy evaluation. | Model bias, conditioning leakage, geometry/calibration drift, and planning budget. |
-| Planner plus skills | Physical Agency, Harness VLA, Guava, ASPIRE, SayCan, ROSA, Code as Policies | Interpretable task decomposition, retry, memory, and reuse of verified or learned primitives. | Tool permissions, grounding, recovery, context drift. |
+| World-model planning | V-JEPA 2-AC, DreamerV3, Robot-Factored World Models, ViTacWorld, World Action Planner, VisualPatchWorld | Predicts consequences and supports explicit planning, augmentation, policy evaluation, or inspectable executable dynamics. | Model bias, conditioning leakage, geometry/calibration drift, code validity, and planning budget. |
+| Planner plus skills | RoboBRIDGE, Physical Agency, Harness VLA, Guava, ASPIRE, HERO, SayCan, ROSA, Code as Policies | Interpretable task decomposition, retry, memory, capability consolidation, and reuse of verified or learned primitives. | Tool permissions, grounding, recovery, context drift, and unsafe experience admission. |
+| Runtime execution verification | CheckVLA | Uses action-conditioned predictions and calibrated thresholds to interrupt or repair action chunks after deployment-time deviations. | World-model misspecification, false interventions, repair latency, and simulation-to-real transfer. |
 | Graph-as-policy search | GaP | Interpretable perception/planning/control graphs refined through simulated rehearsal. | Simulator fidelity, search cost, graph validation, transfer to hardware. |
 | Safety-bounded supervisor | FORGE-plus | Keeps semantic force-budget and recovery selection above immutable low-level enforcement. | Simulation-only evidence, force-model mismatch, and unsafe editable limits. |
 | Self-improving harness | Self-Harness | Trace-grounded, model-specific changes promoted through regression tests while weights remain fixed. | Evaluation leakage, search cost, unsafe editable surfaces, and rollback. |
