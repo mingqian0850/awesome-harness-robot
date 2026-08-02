@@ -1,7 +1,7 @@
 # Awesome Harness Robot
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
-[![Last Updated](https://img.shields.io/badge/last%20verified-2026--07--31-blue)](#scope-and-curation-policy)
+[![Last Updated](https://img.shields.io/badge/last%20verified-2026--08--02-blue)](#scope-and-curation-policy)
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-lightgrey.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
@@ -46,12 +46,13 @@ The practical boundary is simple: **the model proposes; the harness decides whet
 
 ## Current Landscape
 
-Last verified: **2026-07-31**.
+Last verified: **2026-08-02**.
 
 - **Robot harnesses are becoming a research category of their own.** [Guava](https://guava-harness.github.io/) studies model-agnostic embodied tool use; [ASPIRE](https://research.nvidia.com/labs/gear/aspire/) turns execution traces into an expanding skill library; and [GaP](https://graph-robots.github.io/gap/) uses multi-agent coding plus simulation to construct and refine graph-structured robot policies.
 - **Orchestration is moving from a paper abstraction to a modular system boundary.** [RoboBRIDGE](https://arxiv.org/abs/2607.27881) separates monitoring, perception, planning, control, and robot interfaces around pretrained VLAs, while [Embodied Agents Take Control](https://arxiv.org/abs/2607.26148) directly evaluates general software-agent harnesses holding the perceive–act–verify–correct loop in zero-shot navigation.
 - **The orchestration gap is now being measured directly.** [Physical Agency](https://arxiv.org/abs/2607.21725) wraps frozen VLAs and parameterized skills in a closed-loop planner that decomposes goals, verifies outcomes, and recovers without additional policy training.
 - **Improvement and verification are entering the execution loop.** [HERO](https://arxiv.org/abs/2607.26809) bootstraps experience and consolidates repeated interactions into visuomotor policies, while [CheckVLA](https://arxiv.org/abs/2607.26789) uses a frozen action-conditioned world model to detect deviations and rewrite still-deployable action suffixes.
+- **Physical autoresearch now has an explicit harness.** [ENPIRE](https://research.nvidia.com/labs/gear/enpire/) turns reset, safety, verification, policy improvement, audited rollout, and multi-agent experiment evolution into a closed loop over real robot fleets.
 - **The harness itself is becoming an optimization target.** [Self-Harness](https://arxiv.org/abs/2606.09498) mines recurring failures from execution traces, proposes bounded model-specific changes to the surrounding agent system, and promotes them only through regression tests. It is a general coding-agent result rather than a robotics evaluation, but its trace–edit–validate loop is directly relevant to safer offline robot-harness improvement.
 - **[Harness VLA](https://arxiv.org/abs/2607.08448) makes the harness itself the method.** It wraps a frozen VLA as a retryable contact-rich primitive, combines it with a small analytic primitive library, and uses task-specific traces plus global success/failure memory to recover and re-ground without fine-tuning the VLA.
 - **Evaluation is becoming infrastructure.** [vla-evaluation-harness](https://github.com/allenai/vla-evaluation-harness) decouples model servers from benchmark containers and provides a cross-model, cross-benchmark evaluation matrix.
@@ -130,6 +131,7 @@ See [Reference Architecture](docs/reference-architecture.md) for interfaces, sta
 
 ### Agentic Robot and VLA Harnesses
 
+- [ENPIRE](https://research.nvidia.com/labs/gear/enpire/) ([paper](https://arxiv.org/abs/2606.19980)) — Physical-autoresearch harness with Environment, Policy Improvement, Rollout, and Evolution modules. Coding agents build reset and verification routines, revise policy or training code, run budgeted trials on one or more real robots, and exchange successful recipes through Git branches. The authors report a 99% **pass@8** rate on showcased dexterous tasks; this allows up to eight in-context retries per subtask and should not be read as 99% single-attempt success. No public implementation repository was linked as of 2026-08-02.
 - [RoboBRIDGE](https://arxiv.org/abs/2607.27881) — Five-module orchestration layer—Monitor, Perceptor, Planner, Controller, and Robot Interface—that turns pretrained VLAs or other policies into closed-loop agents. It combines rapid failure detection, hierarchical recovery, asynchronous perception, replanning, and embodiment abstraction; the authors report LIBERO, RoboCasa, and multi-platform real-robot studies. No official public code repository was located as of 2026-07-31.
 - [Embodied Agents Take Control](https://arxiv.org/abs/2607.26148) — Controlled study of general software-engineering agent harnesses directly operating a monocular navigation interface through perceive–act–verify–correct loops. It highlights model choice, tool-interface design, latency, context growth, and long-horizon degradation rather than presenting a new robot policy; no official code link was present on the arXiv page as of 2026-07-31.
 - [HERO / Practice Makes Policies](https://arxiv.org/abs/2607.26809) — Self-improving hierarchical embodied agent that bootstraps manipulation from heuristic reasoning, reuses successful exemplars, and consolidates repeated experience into closed-loop visuomotor policies without human demonstrations. The paper reports reduced human intervention and diverse manipulation experiments; no official code link was present as of 2026-07-31.
@@ -202,7 +204,7 @@ Legend: **Open** = code and usable weights; **Partial** = some artifacts, SDK, o
 
 - [V-JEPA 2](https://github.com/facebookresearch/vjepa2) — Self-supervised video world model with an action-conditioned variant for model-predictive robot control.
 - [NVIDIA Cosmos](https://github.com/NVIDIA/Cosmos) — World foundation-model platform for physical-AI video generation, reasoning, and synthetic data workflows.
-- [Robot-Factored World Models](https://bjkim95.github.io/rofacto/) ([paper](https://arxiv.org/abs/2607.22535)) — Converts actions into controller-realized nominal trajectories and camera-aligned URDF renderings, giving a video world model a shared geometric action interface across viewpoints and robot embodiments. The project page's code link was unavailable when checked on 2026-07-27.
+- [Robot-Factored World Models](https://bjkim95.github.io/rofacto/) ([paper](https://arxiv.org/abs/2607.22535)) — Converts actions into controller-realized nominal trajectories and camera-aligned URDF renderings, giving a video world model a shared geometric action interface across viewpoints and robot embodiments. An [official repository](https://github.com/bjkim95/rofacto) now exists, but it still says “Code coming soon” and contains no implementation as of 2026-08-02.
 - [ViTacWorld](https://vitacworld.github.io/) ([paper](https://arxiv.org/abs/2607.22530)) — Action-conditioned visual–tactile world model used to synthesize contact-rich policy rollouts and estimate policy outcomes before deployment. The authors report real-robot augmentation experiments; code was marked “coming soon” as of 2026-07-27.
 - [World Action Planner](https://arxiv.org/abs/2607.27599) — Uses a VLM to propose action plans and a multi-task pose/image-conditioned world model to iteratively optimize them against imagined outcomes. The authors report compositional and zero-shot generalization beyond evaluated VLA and WAM baselines; the project page was announced, but no public code repository was verified as of 2026-07-31.
 - [VisualPatchWorld](https://github.com/HKBU-KnowComp/VisualPatchWorld) ([paper](https://arxiv.org/abs/2607.25236)) — Induces qualitative dynamics programs from short probes and state–action traces, then rolls the inspectable code forward inside model-predictive control. The MIT-licensed repository includes implementation, induced models, result artifacts, and reproduction scripts; reported evidence is in four simulated control environments.

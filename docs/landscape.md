@@ -1,6 +1,6 @@
 # Landscape: Agent Harnesses, VLAs, and Robot Foundation Models
 
-Last verified: **2026-07-31**.
+Last verified: **2026-08-02**.
 
 This note explains the development arc behind the links in the main list. Dates refer to public releases or papers, not necessarily the start of internal development.
 
@@ -12,7 +12,7 @@ This note explains the development arc behind the links in the main list. Dates 
 | 2023 | PaLM-E, RT-2, RT-X/Open X-Embodiment | Web-scale multimodal knowledge and cross-robot data were connected to control. |
 | 2024 | Octo, OpenVLA, π0, RDT-1B, CogACT | Open generalist policies diversified into token, diffusion, and flow-based action heads. |
 | 2025 | OpenVLA-OFT, SmolVLA, π0.5, GR00T N1/N1.5, Gemini Robotics, V-JEPA 2 | Efficient action chunks, open-world adaptation, humanoid policies, on-device deployment, and world-model planning moved to the foreground. |
-| 2026 | Self-Harness, Guava, ASPIRE, GaP, Harness VLA, Physical Agency, RoboBRIDGE, Embodied Agents Take Control, HERO, CheckVLA, InternVLA-A1, TurboVLA, Robot-Factored World Models, ViTacWorld, World Action Planner, VisualPatchWorld, vla-evaluation-harness | The ecosystem began treating orchestration, memory, recovery, skill discovery, runtime verification, planner-facing world models, efficient deployment, evaluation, and the harness itself as optimization targets. |
+| 2026 | Self-Harness, ENPIRE, Guava, ASPIRE, GaP, Harness VLA, Physical Agency, RoboBRIDGE, Embodied Agents Take Control, HERO, CheckVLA, InternVLA-A1, TurboVLA, Robot-Factored World Models, ViTacWorld, World Action Planner, VisualPatchWorld, vla-evaluation-harness | The ecosystem began treating orchestration, memory, recovery, skill discovery, physical autoresearch, runtime verification, planner-facing world models, efficient deployment, evaluation, and the harness itself as optimization targets. |
 
 ## Architecture Trends
 
@@ -104,6 +104,8 @@ For robotics, this pattern belongs in an offline improvement plane rather than t
 
 The evidence is preliminary: Self-Harness evaluates terminal agents, not robots, and uses its so-called held-out split when deciding which candidate edits to promote. Those traces are hidden from the proposer, but repeated score-based selection can still adapt to the split, so a separate untouched final test set remains necessary.
 
+ENPIRE moves this improvement loop onto physical hardware. Its Environment module exposes bounded reset, safety, observation, and automated verification; Policy Improvement edits heuristics, behavior-cloning or RL infrastructure; Rollout preserves auditable trials; and Evolution lets multiple coding agents compare branches and reuse successful recipes across a robot fleet. This is closer to an automated robotics laboratory than runtime task planning. The distinction in reported metrics matters: the project page's 99% pass@8 permits up to eight failure-conditioned retries per subtask, so single-attempt reliability, intervention rate, robot utilization, and token cost remain separate quantities.
+
 ### 8. Evaluation becomes a harness, not a notebook
 
 VLA results were historically difficult to compare because each model carried its own environment fork, dependency set, observation adapter, action scaling, and rollout script. The emerging pattern is:
@@ -132,6 +134,7 @@ CheckVLA illustrates how evaluation logic can also become an online runtime serv
 | Graph-as-policy search | GaP | Interpretable perception/planning/control graphs refined through simulated rehearsal. | Simulator fidelity, search cost, graph validation, transfer to hardware. |
 | Safety-bounded supervisor | FORGE-plus | Keeps semantic force-budget and recovery selection above immutable low-level enforcement. | Simulation-only evidence, force-model mismatch, and unsafe editable limits. |
 | Self-improving harness | Self-Harness | Trace-grounded, model-specific changes promoted through regression tests while weights remain fixed. | Evaluation leakage, search cost, unsafe editable surfaces, and rollback. |
+| Physical autoresearch harness | ENPIRE | Automates reset, verification, policy experiments, rollout auditing, and multi-agent evolution on real robot fleets. | Hardware wear, unsafe experiment generation, verifier gaming, retry-sensitive metrics, robot utilization, and token cost. |
 | Unified foresight VLA | InternVLA-A1 | Joint scene understanding, future visual prediction, and continuous action generation. | Prediction error propagation, compute cost, and separating model versus harness failures. |
 | Hierarchical whole-body | Helix 02 and humanoid stacks | Matches semantic, visuomotor, and stabilization time scales. | Cross-layer contracts, failure propagation, end-to-end tracing. |
 
