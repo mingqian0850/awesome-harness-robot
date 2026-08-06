@@ -1,6 +1,6 @@
 # Landscape: Agent Harnesses, VLAs, and Robot Foundation Models
 
-Last verified: **2026-08-03**.
+Last verified: **2026-08-06**.
 
 This note explains the development arc behind the links in the main list. Dates refer to public releases or papers, not necessarily the start of internal development.
 
@@ -12,7 +12,7 @@ This note explains the development arc behind the links in the main list. Dates 
 | 2023 | PaLM-E, RT-2, RT-X/Open X-Embodiment | Web-scale multimodal knowledge and cross-robot data were connected to control. |
 | 2024 | Octo, OpenVLA, π0, RDT-1B, CogACT | Open generalist policies diversified into token, diffusion, and flow-based action heads. |
 | 2025 | OpenVLA-OFT, SmolVLA, π0.5, GR00T N1/N1.5, Gemini Robotics, V-JEPA 2 | Efficient action chunks, open-world adaptation, humanoid policies, on-device deployment, and world-model planning moved to the foreground. |
-| 2026 | Self-Harness, ENPIRE, Guava, ASPIRE, GaP, Harness VLA, Physical Agency, RoboBRIDGE, Embodied Agents Take Control, HERO, CheckVLA, InternVLA-A1, LingBot-VLA 2.0, Qwen robotics models, TurboVLA, Robot-Factored World Models, Qwen-RobotWorld, ViTacWorld, World Action Planner, VisualPatchWorld, vla-evaluation-harness | The ecosystem began treating orchestration, memory, recovery, skill discovery, physical autoresearch, cross-embodiment schemas, runtime verification, planner-facing world models, efficient deployment, evaluation, and the harness itself as optimization targets. |
+| 2026 | Self-Harness, Harness-R1, ENPIRE, OpenETA, Guava, ASPIRE, GaP, Harness VLA, Physical Agency, RoboBRIDGE, Embodied Agents Take Control, HERO, CheckVLA, CoWAM, SAFECAST, InternVLA-A1, LingBot-VLA 2.0, Qwen robotics models, TurboVLA, Robot-Factored World Models, World Action Models in Real Time, Qwen-RobotWorld, ViTacWorld, World Action Planner, VisualPatchWorld, vla-evaluation-harness | The ecosystem began treating orchestration, memory, recovery, skill discovery, physical autoresearch, cross-embodiment schemas, asynchronous serving, runtime verification, planner-facing world models, efficient deployment, evaluation, and the harness itself as optimization targets. |
 
 ## Architecture Trends
 
@@ -36,6 +36,8 @@ Generating one action at a time makes a slow model part of the control deadline.
 - monitor inference and network deadlines;
 - fall back to hold/stop/recovery behavior;
 - record the exact executed action, not only the model proposal.
+
+World Action Models in Real Time tests six concrete deployment strategies on a 10 Hz bimanual platform and shows why blending alone cannot repair a misaligned observation–prediction–execution timeline. Its author-reported results favor prefix-conditioned generation as the best overall speed, smoothness, and task-performance trade-off, but the broader systems lesson is independent of the winning model: the harness must timestamp committed actions, align the next conditioning prefix with what actually executed, and define a safe chunk-switch boundary.
 
 ### 3. Cross-embodiment learning becomes a schema problem
 
@@ -81,6 +83,8 @@ This is not a retreat from learning. It is a recognition that language reasoning
 
 Harness VLA makes this boundary explicit at the manipulation-policy level. Its agent keeps semantic re-grounding, non-contact movement, re-staging, retries, and memory outside a frozen VLA; the VLA is invoked as a local contact-rich primitive. The contribution is therefore not another base policy but a method for extending a policy's operating range through orchestration and execution feedback.
 
+OpenETA makes the hierarchy executable as an open runtime. Its planner is permitted one typed, world-changing tool call per turn; a host-owned interface validates and executes that call; and the next decision is conditioned on a fresh world observation. This is a useful physical-agent contract because permissions, timing, verification, logging, and real-versus-sim adapters remain outside the planner. The official repository includes code, tests, replayable logging, skills, memory, simulation adapters, and a UR5e deployment path; its benchmark and hardware results remain author-reported.
+
 Physical Agency names and measures the orchestration gap between frozen motor skills used alone and the same skills inside a closed-loop planner. Its Pigey orchestrator decomposes goals, invokes either VLA policies or parameterized skills, verifies low-level observations, and recovers without policy post-training. FORGE-plus demonstrates a narrower safety-oriented hierarchy: a frozen text LLM may choose a force budget and recovery maneuver, but the deterministic controller owns enforcement and recovery cannot raise the ceiling.
 
 RoboBRIDGE makes the deployment boundary more explicit through five replaceable modules: Monitor, Perceptor, Planner, Controller, and Robot Interface. Unlike wrappers centered on one recovery technique, it treats asynchronous perception, hierarchical recovery, embodiment adaptation, and policy selection as coordinated runtime services. Embodied Agents Take Control probes an even thinner interface: general software-agent harnesses receive a camera and discrete actions, revealing that model capability, optional waypoint tools, context growth, and latency can matter as much as bespoke embodied workflow code.
@@ -112,6 +116,8 @@ The evidence is preliminary: Self-Harness evaluates terminal agents, not robots,
 
 ENPIRE moves this improvement loop onto physical hardware. Its Environment module exposes bounded reset, safety, observation, and automated verification; Policy Improvement edits heuristics, behavior-cloning or RL infrastructure; Rollout preserves auditable trials; and Evolution lets multiple coding agents compare branches and reuse successful recipes across a robot fleet. This is closer to an automated robotics laboratory than runtime task planning. The distinction in reported metrics matters: the project page's 99% pass@8 permits up to eight failure-conditioned retries per subtask, so single-attempt reliability, intervention rate, robot utilization, and token cost remain separate quantities.
 
+Harness-R1 takes a different route from Self-Harness: it post-trains a separate 9B harness engineer with supervised cold start and online reinforcement learning, using fresh reruns of a frozen target agent to reward executable lifecycle-hook patches. The official repository and model weights are released, but the reported WebShop, ALFWorld, and DBBench results contain no robot experiments. In robotics, same-batch repair rewards would need stronger temporal separation, untouched evaluation sets, simulation and replay gates, and immutable host safety boundaries before any candidate patch reached hardware.
+
 ### 8. Evaluation becomes a harness, not a notebook
 
 VLA results were historically difficult to compare because each model carried its own environment fork, dependency set, observation adapter, action scaling, and rollout script. The emerging pattern is:
@@ -127,6 +133,8 @@ The remaining gap is standardized, multi-site real-robot evaluation. Simulation 
 
 CheckVLA illustrates how evaluation logic can also become an online runtime service. It compares observed evolution with an action-conditioned world-model reference, calibrates when to intervene, and rewrites only the suffix that remains executable after inference latency. Its current RoboCasa365 evidence is simulation-only, but the separation between action proposal, execution evidence, verifier, and repair is a reusable harness pattern.
 
+CoWAM and SAFECAST sharpen two adjacent contracts. CoWAM allows a bimanual policy intervention only when typed coordination obligations and calibrated gates admit it, otherwise retaining the nominal action or abstaining; its current evidence is eight simulated tasks. SAFECAST augments hidden-state failure-probe training and calibration with visual and language contrast sets, with author-reported results on real-world DROID rollout data and LIBERO simulation. Neither arXiv page linked official code as of 2026-08-06, and neither result is an independent safety certification.
+
 ## Implementation Families
 
 | Family | Examples | Strengths | Common harness concern |
@@ -135,11 +143,12 @@ CheckVLA illustrates how evaluation logic can also become an online runtime serv
 | Continuous regression | OpenVLA-OFT | Simple, fast, deterministic action chunks. | Median-mode behavior and limited multimodality. |
 | Diffusion / flow matching | π0/π0.5, CogACT, GR00T, SmolVLA, MolmoAct 2, LingBot-VLA 2.0, Qwen-VLA/RobotManip | Expressive continuous action distributions. | Denoising latency, stochasticity, chunk consistency, and artifact availability. |
 | World-model planning | V-JEPA 2-AC, DreamerV3, Robot-Factored World Models, Qwen-RobotWorld, ViTacWorld, World Action Planner, VisualPatchWorld | Predicts consequences and supports explicit planning, augmentation, policy evaluation, or inspectable executable dynamics. | Model bias, conditioning leakage, geometry/calibration drift, code validity, and planning budget. |
-| Planner plus skills | RoboBRIDGE, Physical Agency, Harness VLA, Guava, ASPIRE, HERO, SayCan, ROSA, Code as Policies | Interpretable task decomposition, retry, memory, capability consolidation, and reuse of verified or learned primitives. | Tool permissions, grounding, recovery, context drift, and unsafe experience admission. |
-| Runtime execution verification | CheckVLA | Uses action-conditioned predictions and calibrated thresholds to interrupt or repair action chunks after deployment-time deviations. | World-model misspecification, false interventions, repair latency, and simulation-to-real transfer. |
+| Planner plus skills | OpenETA, RoboBRIDGE, Physical Agency, Harness VLA, Guava, ASPIRE, HERO, SayCan, ROSA, Code as Policies | Interpretable task decomposition, typed tool calls, host-owned execution, retry, memory, capability consolidation, and reuse of verified or learned primitives. | Tool permissions, grounding, recovery, context drift, and unsafe experience admission. |
+| Asynchronous action-chunk serving | World Action Models in Real Time | Overlaps inference with execution and makes observation–prediction–command alignment an explicit runtime contract. | Stale observations, chunk-boundary discontinuities, unsafe switching, and hardware-specific timing. |
+| Runtime execution verification | CheckVLA, CoWAM, SAFECAST | Uses predicted futures, coordination contracts, calibrated thresholds, or contrast-set probes to detect and constrain deployment-time failures. | Model misspecification, false interventions, repair latency, calibration shift, and simulation-to-real transfer. |
 | Graph-as-policy search | GaP | Interpretable perception/planning/control graphs refined through simulated rehearsal. | Simulator fidelity, search cost, graph validation, transfer to hardware. |
 | Safety-bounded supervisor | FORGE-plus | Keeps semantic force-budget and recovery selection above immutable low-level enforcement. | Simulation-only evidence, force-model mismatch, and unsafe editable limits. |
-| Self-improving harness | Self-Harness | Trace-grounded, model-specific changes promoted through regression tests while weights remain fixed. | Evaluation leakage, search cost, unsafe editable surfaces, and rollback. |
+| Self-improving harness | Self-Harness, Harness-R1 | Trace-grounded, model-specific changes proposed or learned around a fixed target and admitted through measured reruns. | Evaluation leakage, same-batch reward overfitting, search cost, unsafe editable surfaces, and rollback. |
 | Physical autoresearch harness | ENPIRE | Automates reset, verification, policy experiments, rollout auditing, and multi-agent evolution on real robot fleets. | Hardware wear, unsafe experiment generation, verifier gaming, retry-sensitive metrics, robot utilization, and token cost. |
 | Unified foresight VLA | InternVLA-A1 | Joint scene understanding, future visual prediction, and continuous action generation. | Prediction error propagation, compute cost, and separating model versus harness failures. |
 | Hierarchical whole-body | Helix 02 and humanoid stacks | Matches semantic, visuomotor, and stabilization time scales. | Cross-layer contracts, failure propagation, end-to-end tracing. |
