@@ -1,7 +1,7 @@
 # Awesome Harness Robot
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
-[![Last Updated](https://img.shields.io/badge/last%20verified-2026--08--06-blue)](#scope-and-curation-policy)
+[![Last Updated](https://img.shields.io/badge/last%20verified-2026--08--07-blue)](#scope-and-curation-policy)
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-lightgrey.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
@@ -46,7 +46,7 @@ The practical boundary is simple: **the model proposes; the harness decides whet
 
 ## Current Landscape
 
-Last verified: **2026-08-06**.
+Last verified: **2026-08-07**.
 
 - **Robot harnesses are becoming a research category of their own.** [Guava](https://guava-harness.github.io/) studies model-agnostic embodied tool use; [ASPIRE](https://research.nvidia.com/labs/gear/aspire/) turns execution traces into an expanding skill library; and [GaP](https://graph-robots.github.io/gap/) uses multi-agent coding plus simulation to construct and refine graph-structured robot policies.
 - **Orchestration is moving from a paper abstraction to a modular system boundary.** [RoboBRIDGE](https://arxiv.org/abs/2607.27881) separates monitoring, perception, planning, control, and robot interfaces around pretrained VLAs, while [Embodied Agents Take Control](https://arxiv.org/abs/2607.26148) directly evaluates general software-agent harnesses holding the perceive–act–verify–correct loop in zero-shot navigation.
@@ -56,12 +56,12 @@ Last verified: **2026-08-06**.
 - **Physical autoresearch now has an explicit harness.** [ENPIRE](https://research.nvidia.com/labs/gear/enpire/) turns reset, safety, verification, policy improvement, audited rollout, and multi-agent experiment evolution into a closed loop over real robot fleets.
 - **The harness itself is becoming an optimization target.** [Self-Harness](https://arxiv.org/abs/2606.09498) mines recurring failures from execution traces, proposes bounded model-specific changes to the surrounding agent system, and promotes them only through regression tests. It is a general coding-agent result rather than a robotics evaluation, but its trace–edit–validate loop is directly relevant to safer offline robot-harness improvement.
 - **[Harness VLA](https://arxiv.org/abs/2607.08448) makes the harness itself the method.** It wraps a frozen VLA as a retryable contact-rich primitive, combines it with a small analytic primitive library, and uses task-specific traces plus global success/failure memory to recover and re-ground without fine-tuning the VLA.
-- **Evaluation is becoming infrastructure.** [vla-evaluation-harness](https://github.com/allenai/vla-evaluation-harness) decouples model servers from benchmark containers and provides a cross-model, cross-benchmark evaluation matrix.
+- **Evaluation is becoming infrastructure.** [vla-evaluation-harness](https://github.com/allenai/vla-evaluation-harness) decouples model servers from benchmark containers; [HarnessOpt-Bench](https://arxiv.org/abs/2608.06301) places harness optimization behind a metered, held-out evaluation boundary; and [GAUGE](https://arxiv.org/abs/2608.05948) diagnoses which physical laws simulators and video world models violate.
 - **Common interfaces are winning.** [LeRobot](https://github.com/huggingface/lerobot) now spans data capture, policies, VLA/world-model integrations, evaluation, and hardware plugins; [StarVLA](https://github.com/starVLA/starVLA) focuses on composable backbones, action heads, datasets, and benchmarks.
 - **Action generation is moving beyond one-token-at-a-time control.** Flow matching, diffusion heads, continuous regression, learned action tokenizers such as FAST, and action chunking are the dominant implementation families.
 - **Cross-embodiment adaptation is a first-class concern.** Current stacks carry robot-specific state/action schemas, normalization statistics, embodiment tags, and camera layouts alongside checkpoints. [LingBot-VLA 2.0](https://github.com/Robbyant/lingbot-vla-v2) uses a 55-dimensional canonical schema, while Qwen-RobotManip reports an 80-dimensional masked schema and camera-frame motion alignment.
 - **Open models cover a useful range.** Small local policies such as [SmolVLA](https://huggingface.co/blog/smolvla), open research stacks such as [OpenVLA-OFT](https://github.com/moojink/openvla-oft) and [openpi](https://github.com/Physical-Intelligence/openpi), and larger humanoid-oriented systems such as [GR00T N1.7](https://github.com/NVIDIA/Isaac-GR00T) can all be studied and adapted.
-- **World-model interfaces are becoming embodiment-aware and multimodal.** [Robot-Factored World Models](https://bjkim95.github.io/rofacto/) exposes controller-realized robot motion as rendered geometry, while [ViTacWorld](https://vitacworld.github.io/) predicts synchronized visual and tactile outcomes for rollout generation and policy evaluation.
+- **World-model interfaces are becoming embodiment-aware and multimodal.** [Robot-Factored World Models](https://bjkim95.github.io/rofacto/) exposes controller-realized robot motion as rendered geometry, [ViTacWorld](https://vitacworld.github.io/) predicts synchronized visual and tactile outcomes, and [GeniWorld](https://chenghaogu.github.io/GeniWorld/) turns URDF-rendered actions into an interactive policy-evaluation interface.
 - **World models are also becoming planner-facing artifacts.** [World Action Planner](https://arxiv.org/abs/2607.27599) searches over imagined visual outcomes, while [VisualPatchWorld](https://github.com/HKBU-KnowComp/VisualPatchWorld) induces inspectable dynamics programs that can be rolled forward inside model-predictive control.
 - **Serving and intervention now have explicit contracts.** [World Action Models in Real Time](https://arxiv.org/abs/2608.01880) studies temporal alignment and asynchronous chunk serving, [CoWAM](https://arxiv.org/abs/2608.02578) gates bimanual policy interventions through typed coordination obligations, and [SAFECAST](https://arxiv.org/abs/2608.04246) calibrates VLA failure detectors under deployment shift.
 - **The hard problems are still systems problems.** Real-time latency, train–test drift, recovery, long-horizon compounding error, safety, and comparable real-robot evaluation remain less solved than short-horizon benchmark success.
@@ -103,6 +103,7 @@ See [Reference Architecture](docs/reference-architecture.md) for interfaces, sta
 
 - [Self-Harness: Harnesses That Improve Themselves](https://arxiv.org/abs/2606.09498) — Keeps the base model fixed while the same model mines verifier-grounded failure patterns, proposes minimal changes to prompts, tools, memory, runtime controls, skills, or subagents, and promotes candidates through held-in/held-out regression gates. Evaluated on Terminal-Bench-2.0 rather than robots; no official code link was present as of 2026-07-26.
 - [Harness-R1](https://github.com/DeepExperience/Harness-R1) ([paper](https://arxiv.org/abs/2608.02276), [models](https://huggingface.co/ShaoShuai0605/Harness-R1)) — Trains a separate 9B harness engineer with supervised cold start and online reinforcement learning to turn batches of agent failures into validated executable lifecycle-hook patches while the target model stays frozen. The Apache-2.0 repository and model weights are public. Results are author-reported on WebShop, ALFWorld, and DBBench rather than robots, so transfer to a physical-agent harness remains unvalidated.
+- [HarnessOpt-Bench](https://arxiv.org/abs/2608.06301) — Evaluates end-to-end harness optimization under fixed, expensive, stochastic target-evaluation budgets. A trusted execution environment hides the held-out test partition, meters target-agent resources, and preserves candidate versions for audit; the authors report 111 runs over five frontier optimizer models and four downstream digital-agent tasks. It contains no robot experiment, and no official code or benchmark release was linked as of 2026-08-07.
 
 ### End-to-End Robot Learning
 
@@ -216,6 +217,8 @@ Legend: **Open** = code and usable weights; **Partial** = some artifacts, SDK, o
 - [ViTacWorld](https://vitacworld.github.io/) ([paper](https://arxiv.org/abs/2607.22530)) — Action-conditioned visual–tactile world model used to synthesize contact-rich policy rollouts and estimate policy outcomes before deployment. The authors report real-robot augmentation experiments; code was marked “coming soon” as of 2026-07-27.
 - [World Action Planner](https://arxiv.org/abs/2607.27599) — Uses a VLM to propose action plans and a multi-task pose/image-conditioned world model to iteratively optimize them against imagined outcomes. The authors report compositional and zero-shot generalization beyond evaluated VLA and WAM baselines; the project page was announced, but no public code repository was verified as of 2026-07-31.
 - [World Action Models in Real Time](https://arxiv.org/abs/2608.01880) — Empirical deployment study comparing six synchronous and asynchronous action-chunk strategies on a 10 Hz bimanual robot. The authors identify observation–prediction–execution alignment as the key boundary and report prefix-conditioned generation as the best overall trade-off; no official code link was present as of 2026-08-06.
+- [ω-0](https://arxiv.org/abs/2608.06375) — Latent predictive world-action model for concurrent real-world humanoid locomotion and manipulation. It couples future-observation embeddings with diffusion-based whole-body action generation and introduces the author-reported 40+ hour ω-HOME dataset and 11-task evaluation; no official project, code, dataset, or weights link was present as of 2026-08-07.
+- [GeniWorld](https://chenghaogu.github.io/GeniWorld/) ([paper](https://arxiv.org/abs/2608.06332)) — Interactive manipulation world model that converts numeric actions into URDF-rendered visual actions, decouples embodiment kinematics from environment dynamics, and supports closed-loop policy evaluation and synthetic rollouts. Results are author-reported; the official project page did not expose code, data, or weights as of 2026-08-07.
 - [VisualPatchWorld](https://github.com/HKBU-KnowComp/VisualPatchWorld) ([paper](https://arxiv.org/abs/2607.25236)) — Induces qualitative dynamics programs from short probes and state–action traces, then rolls the inspectable code forward inside model-predictive control. The MIT-licensed repository includes implementation, induced models, result artifacts, and reproduction scripts; reported evidence is in four simulated control environments.
 - [DreamerV3](https://github.com/danijar/dreamerv3) — General world-model reinforcement-learning baseline across diverse domains.
 - [Genie 2](https://deepmind.google/discover/blog/genie-2-a-large-scale-foundation-world-model/) — Large-scale interactive world-model research; not an open robot-control stack.
@@ -275,6 +278,10 @@ These models are ingredients, not robot policies. A harness still needs geometri
 - [ALFRED](https://askforalfred.com/) — Language-guided household task benchmark combining navigation and interaction.
 - [TEACh](https://github.com/alexa/teach) — Dialogue-guided embodied task completion.
 - [AI2-THOR](https://github.com/allenai/ai2thor) — Interactive household environments used by many embodied-agent benchmarks.
+
+### Simulation and World-Model Fidelity
+
+- [GAUGE](https://arxiv.org/abs/2608.05948) — Real-world-grounded diagnostic benchmark spanning 22 controlled task families, calibrated physical metadata, uncertainty annotations, and task-specific observables. The authors compare Isaac Sim, Genesis, and Newton plus six image-to-video models, finding different failures in contact, deformation, momentum transfer, and inferred dynamics; no official code or dataset link was present as of 2026-08-07.
 
 ### What to Measure
 

@@ -1,6 +1,6 @@
 # Landscape: Agent Harnesses, VLAs, and Robot Foundation Models
 
-Last verified: **2026-08-06**.
+Last verified: **2026-08-07**.
 
 This note explains the development arc behind the links in the main list. Dates refer to public releases or papers, not necessarily the start of internal development.
 
@@ -12,7 +12,7 @@ This note explains the development arc behind the links in the main list. Dates 
 | 2023 | PaLM-E, RT-2, RT-X/Open X-Embodiment | Web-scale multimodal knowledge and cross-robot data were connected to control. |
 | 2024 | Octo, OpenVLA, π0, RDT-1B, CogACT | Open generalist policies diversified into token, diffusion, and flow-based action heads. |
 | 2025 | OpenVLA-OFT, SmolVLA, π0.5, GR00T N1/N1.5, Gemini Robotics, V-JEPA 2 | Efficient action chunks, open-world adaptation, humanoid policies, on-device deployment, and world-model planning moved to the foreground. |
-| 2026 | Self-Harness, Harness-R1, ENPIRE, OpenETA, Guava, ASPIRE, GaP, Harness VLA, Physical Agency, RoboBRIDGE, Embodied Agents Take Control, HERO, CheckVLA, CoWAM, SAFECAST, InternVLA-A1, LingBot-VLA 2.0, Qwen robotics models, TurboVLA, Robot-Factored World Models, World Action Models in Real Time, Qwen-RobotWorld, ViTacWorld, World Action Planner, VisualPatchWorld, vla-evaluation-harness | The ecosystem began treating orchestration, memory, recovery, skill discovery, physical autoresearch, cross-embodiment schemas, asynchronous serving, runtime verification, planner-facing world models, efficient deployment, evaluation, and the harness itself as optimization targets. |
+| 2026 | Self-Harness, Harness-R1, HarnessOpt-Bench, ENPIRE, OpenETA, Guava, ASPIRE, GaP, Harness VLA, Physical Agency, RoboBRIDGE, Embodied Agents Take Control, HERO, CheckVLA, CoWAM, SAFECAST, InternVLA-A1, LingBot-VLA 2.0, Qwen robotics models, TurboVLA, Robot-Factored World Models, World Action Models in Real Time, ω-0, GeniWorld, Qwen-RobotWorld, ViTacWorld, World Action Planner, VisualPatchWorld, GAUGE, vla-evaluation-harness | The ecosystem began treating orchestration, memory, recovery, skill discovery, physical autoresearch, cross-embodiment schemas, asynchronous serving, runtime verification, planner-facing world models, physical-fidelity diagnosis, evaluation, and the harness itself as optimization targets. |
 
 ## Architecture Trends
 
@@ -70,6 +70,8 @@ Robot-Factored World Models makes this translation boundary explicit. Instead of
 
 Qwen-RobotWorld explores a broader but less reproducible interface: natural language represents actions across manipulation, navigation, driving, and human activity, and a video generator supplies imagined trajectories for data augmentation, evaluation, or planning. This removes platform-specific numeric actions from the world-model input, but shifts precision and executability back to the downstream harness. No official code or weights were verified as of 2026-08-03.
 
+GeniWorld and ω-0 extend this boundary in different directions. GeniWorld converts numeric manipulation actions into URDF-rendered visual actions and couples autoregressive video prediction to high-frequency kinematic control, making the learned environment interactive for policy evaluation and synthetic rollouts. ω-0 avoids future-video reconstruction and instead couples lightweight future-observation embeddings to controller-compatible whole-body action latents for concurrent humanoid locomotion and manipulation. Both results and real-robot claims are author-reported, and neither arXiv/project page exposed a runnable implementation, public dataset, or weights as of 2026-08-07.
+
 ### 5. Hierarchies return
 
 End-to-end pixels-to-actions remains attractive, but deployed systems increasingly use multiple rates and levels:
@@ -118,6 +120,8 @@ ENPIRE moves this improvement loop onto physical hardware. Its Environment modul
 
 Harness-R1 takes a different route from Self-Harness: it post-trains a separate 9B harness engineer with supervised cold start and online reinforcement learning, using fresh reruns of a frozen target agent to reward executable lifecycle-hook patches. The official repository and model weights are released, but the reported WebShop, ALFWorld, and DBBench results contain no robot experiments. In robotics, same-batch repair rewards would need stronger temporal separation, untouched evaluation sets, simulation and replay gates, and immutable host safety boundaries before any candidate patch reached hardware.
 
+HarnessOpt-Bench turns this improvement loop into a measured capability. An optimizer receives a seed harness, graded feedback, and a fixed target-evaluation budget; a trusted execution environment hides the held-out test partition, meters resource use, and preserves every candidate version. This is a stronger search/evaluation separation than repeatedly selecting on a visible regression set, but the current four downstream tasks are digital-agent tasks rather than robotics. A robot adaptation would additionally need simulator and replay budgets, hardware-use accounting, immutable safety tests, and a final multi-site physical evaluation.
+
 ### 8. Evaluation becomes a harness, not a notebook
 
 VLA results were historically difficult to compare because each model carried its own environment fork, dependency set, observation adapter, action scaling, and rollout script. The emerging pattern is:
@@ -135,6 +139,8 @@ CheckVLA illustrates how evaluation logic can also become an online runtime serv
 
 CoWAM and SAFECAST sharpen two adjacent contracts. CoWAM allows a bimanual policy intervention only when typed coordination obligations and calibrated gates admit it, otherwise retaining the nominal action or abstaining; its current evidence is eight simulated tasks. SAFECAST augments hidden-state failure-probe training and calibration with visual and language contrast sets, with author-reported results on real-world DROID rollout data and LIBERO simulation. Neither arXiv page linked official code as of 2026-08-06, and neither result is an independent safety certification.
 
+GAUGE adds a complementary environment-level diagnosis. Rather than judging a simulator or video world model only by pixels or human preference, it pairs real trajectories and calibrated metadata with observables for collision, friction, momentum transfer, oscillation, self-contact, and deformation. The authors report that no tested physics engine is uniformly faithful and that video models may reproduce the expected equation form while inferring incorrect physical parameters. Its 22-task design is valuable for harness regression, but no official code or dataset release was linked as of 2026-08-07.
+
 ## Implementation Families
 
 | Family | Examples | Strengths | Common harness concern |
@@ -142,13 +148,14 @@ CoWAM and SAFECAST sharpen two adjacent contracts. CoWAM allows a bimanual polic
 | Autoregressive action tokens | OpenVLA, RT-1/2, π0-FAST | Reuses language-model training and decoding machinery. | Decode latency, token/action calibration, compounding errors. |
 | Continuous regression | OpenVLA-OFT | Simple, fast, deterministic action chunks. | Median-mode behavior and limited multimodality. |
 | Diffusion / flow matching | π0/π0.5, CogACT, GR00T, SmolVLA, MolmoAct 2, LingBot-VLA 2.0, Qwen-VLA/RobotManip | Expressive continuous action distributions. | Denoising latency, stochasticity, chunk consistency, and artifact availability. |
-| World-model planning | V-JEPA 2-AC, DreamerV3, Robot-Factored World Models, Qwen-RobotWorld, ViTacWorld, World Action Planner, VisualPatchWorld | Predicts consequences and supports explicit planning, augmentation, policy evaluation, or inspectable executable dynamics. | Model bias, conditioning leakage, geometry/calibration drift, code validity, and planning budget. |
+| World-model planning and interaction | V-JEPA 2-AC, DreamerV3, Robot-Factored World Models, Qwen-RobotWorld, ViTacWorld, GeniWorld, World Action Planner, VisualPatchWorld | Predicts consequences and supports explicit planning, interactive rollouts, augmentation, policy evaluation, or inspectable executable dynamics. | Model bias, conditioning leakage, geometry/calibration drift, code validity, and planning budget. |
+| Whole-body world-action models | ω-0 | Couples predictive latent objectives to controller-compatible locomotion and manipulation actions. | Dataset access, whole-body safety, controller dependence, artifact availability, and independent real-robot replication. |
 | Planner plus skills | OpenETA, RoboBRIDGE, Physical Agency, Harness VLA, Guava, ASPIRE, HERO, SayCan, ROSA, Code as Policies | Interpretable task decomposition, typed tool calls, host-owned execution, retry, memory, capability consolidation, and reuse of verified or learned primitives. | Tool permissions, grounding, recovery, context drift, and unsafe experience admission. |
 | Asynchronous action-chunk serving | World Action Models in Real Time | Overlaps inference with execution and makes observation–prediction–command alignment an explicit runtime contract. | Stale observations, chunk-boundary discontinuities, unsafe switching, and hardware-specific timing. |
 | Runtime execution verification | CheckVLA, CoWAM, SAFECAST | Uses predicted futures, coordination contracts, calibrated thresholds, or contrast-set probes to detect and constrain deployment-time failures. | Model misspecification, false interventions, repair latency, calibration shift, and simulation-to-real transfer. |
 | Graph-as-policy search | GaP | Interpretable perception/planning/control graphs refined through simulated rehearsal. | Simulator fidelity, search cost, graph validation, transfer to hardware. |
 | Safety-bounded supervisor | FORGE-plus | Keeps semantic force-budget and recovery selection above immutable low-level enforcement. | Simulation-only evidence, force-model mismatch, and unsafe editable limits. |
-| Self-improving harness | Self-Harness, Harness-R1 | Trace-grounded, model-specific changes proposed or learned around a fixed target and admitted through measured reruns. | Evaluation leakage, same-batch reward overfitting, search cost, unsafe editable surfaces, and rollback. |
+| Harness optimization | Self-Harness, Harness-R1, HarnessOpt-Bench | Trace-grounded, model-specific changes proposed or learned around a fixed target, with budgeted evaluation and auditable candidate selection. | Evaluation leakage, same-batch reward overfitting, search cost, unsafe editable surfaces, and rollback. |
 | Physical autoresearch harness | ENPIRE | Automates reset, verification, policy experiments, rollout auditing, and multi-agent evolution on real robot fleets. | Hardware wear, unsafe experiment generation, verifier gaming, retry-sensitive metrics, robot utilization, and token cost. |
 | Unified foresight VLA | InternVLA-A1 | Joint scene understanding, future visual prediction, and continuous action generation. | Prediction error propagation, compute cost, and separating model versus harness failures. |
 | Hierarchical whole-body | Helix 02 and humanoid stacks | Matches semantic, visuomotor, and stabilization time scales. | Cross-layer contracts, failure propagation, end-to-end tracing. |
