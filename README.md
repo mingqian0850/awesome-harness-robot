@@ -1,7 +1,7 @@
 # Awesome Harness Robot
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
-[![Last Updated](https://img.shields.io/badge/last%20verified-2026--08--13-blue)](#scope-and-curation-policy)
+[![Last Updated](https://img.shields.io/badge/last%20verified-2026--08--14-blue)](#scope-and-curation-policy)
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-lightgrey.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
@@ -46,7 +46,7 @@ The practical boundary is simple: **the model proposes; the harness decides whet
 
 ## Current Landscape
 
-Last verified: **2026-08-13**.
+Last verified: **2026-08-14**.
 
 - **Robot harnesses are becoming a research category of their own.** [Guava](https://guava-harness.github.io/) studies model-agnostic embodied tool use; [ASPIRE](https://research.nvidia.com/labs/gear/aspire/) turns execution traces into an expanding skill library; and [GaP](https://graph-robots.github.io/gap/) uses multi-agent coding plus simulation to construct and refine graph-structured robot policies.
 - **Orchestration is moving from a paper abstraction to a modular system boundary.** [RoboBRIDGE](https://arxiv.org/abs/2607.27881) separates monitoring, perception, planning, control, and robot interfaces around pretrained VLAs, while [Embodied Agents Take Control](https://arxiv.org/abs/2607.26148) directly evaluates general software-agent harnesses holding the perceive–act–verify–correct loop in zero-shot navigation.
@@ -60,6 +60,7 @@ Last verified: **2026-08-13**.
 - **Harness evolution is acquiring safety and evaluation boundaries.** [SHE](https://arxiv.org/abs/2608.09885) attributes failures to four separately evolvable safety artifacts, while [Evo-Bench](https://arxiv.org/abs/2608.09096) tests whether improvements transfer beyond the tasks used to evolve them. Both are digital-agent results, not robot validation.
 - **Harnesses can transfer capability without changing model weights.** [AI4AI at Test-Time](https://arxiv.org/abs/2608.12307) uses a stronger builder model to move reasoning into deterministic code, routing, and output enforcement around a weaker target; [Harness-IF](https://arxiv.org/abs/2608.11727) tests whether agents actually follow rules across five harness instruction surfaces. Both are coding/digital-agent results rather than robot validation.
 - **Safety evaluation is becoming execution-grounded.** [REDAgentBench](https://arxiv.org/abs/2608.10669) verifies harmful effects from sandbox service receipts and final state rather than collapsing exposure, execution, visibility, and adjudication into one model-judged score; its current evidence is for digital agents, not robots.
+- **Persistent skill learning creates a new safety lifecycle.** [SkillMisevo](https://github.com/henrymao2004/misevolve) tracks whether unsafe experience becomes an authored skill, is retrieved on benign work, and causes fresh-session harm; its mitigation governs both skill writes and later reuse across four coding-agent harnesses.
 - **[Harness VLA](https://arxiv.org/abs/2607.08448) makes the harness itself the method.** It wraps a frozen VLA as a retryable contact-rich primitive, combines it with a small analytic primitive library, and uses task-specific traces plus global success/failure memory to recover and re-ground without fine-tuning the VLA.
 - **Evaluation is becoming infrastructure.** [vla-evaluation-harness](https://github.com/allenai/vla-evaluation-harness) decouples model servers from benchmark containers; [HarnessOpt-Bench](https://arxiv.org/abs/2608.06301) places harness optimization behind a metered, held-out evaluation boundary; and [GAUGE](https://arxiv.org/abs/2608.05948) diagnoses which physical laws simulators and video world models violate.
 - **Robot policies are gaining a shared systems contract.** [XPolicyLab](https://github.com/XPolicyLab/XPolicyLab) standardizes observation, action, trajectory, reset, serving, and evaluation interfaces across 42 policies, RoboTwin, RoboDojo, and real-robot clients.
@@ -76,6 +77,7 @@ Last verified: **2026-08-13**.
 - **One WAM checkpoint can now expose multiple compute modes.** [Flex-π](https://flex-pi.github.io/) jointly denoises actions with RGB, pointmap geometry, and semantic latents, then enables different observed/predicted stream subsets at deployment. The official repository is only a release placeholder as of 2026-08-12.
 - **Future conditioning no longer requires iterative video rollout.** [RIFT](https://arxiv.org/abs/2608.11521) first probes whether WAM actions consume future-cache content, then replaces iterative cache production with learned anticipation tokens and a single backbone pass; current evidence is simulation-only.
 - **Serving and intervention now have explicit contracts.** [World Action Models in Real Time](https://arxiv.org/abs/2608.01880) studies temporal alignment and asynchronous chunk serving, [CoWAM](https://arxiv.org/abs/2608.02578) gates bimanual policy interventions through typed coordination obligations, and [SAFECAST](https://arxiv.org/abs/2608.04246) calibrates VLA failure detectors under deployment shift.
+- **VLA monitoring is moving earlier and deeper.** [ContactGuard](https://arxiv.org/abs/2608.13438) predicts failure before a planned chunk reaches contact, while [Decoding Task Progress](https://arxiv.org/abs/2608.13474) reads stalled progress directly from VLA activations as a lightweight deployment signal.
 - **VLA memory is moving from context to persistent state.** [AtlasVLA](https://arxiv.org/abs/2608.06729) keeps a 4D voxel-hashed world state plus an ego-working memory so policies survive partial observability and long horizons, while [PSG-JEPA](https://arxiv.org/abs/2608.06799) grounds JEPA latents in proprioceptive state to make world-model representations control-relevant.
 - **WAM harnesses are closing the prediction–execution loop.** [HarnessWAM](https://arxiv.org/abs/2608.09516) adds task state, capability-constrained skills, verification, and recovery; [TempoWAM](https://arxiv.org/abs/2608.09492) decides how much of each chunk to execute from observed progress; and [WorldSimProbe](https://arxiv.org/abs/2608.09298) tests whether imagined actions actually cause grounded motion and interaction.
 - **Perception is part of the safety boundary.** [Hijacking Robots with a Piece of Paper](https://arxiv.org/abs/2608.05715) shows physical signage can prompt-inject VLM-controlled robots (up to 29.4% attack success across three frontier VLMs), and [Failing Gracefully](https://arxiv.org/abs/2608.05313) scores the impact of inevitable robot failures rather than only their probability.
@@ -129,6 +131,7 @@ See [Reference Architecture](docs/reference-architecture.md) for interfaces, sta
 - [REDAgentBench](https://arxiv.org/abs/2608.10669) — Executable red-teaming framework that derives attacks from explicit safety constraints, runs them in isolated service sandboxes, and verifies effects from receipts and final-state changes. Its 1,661 cases span five service surfaces, six models, and three harnesses. Results are author-reported and digital-agent only; no official code or benchmark repository was linked as of 2026-08-12.
 - [AI4AI at Test-Time](https://arxiv.org/abs/2608.12307) — Strong-to-weak scaffolding in which a builder model iteratively constructs an inference-time harness for a weaker frozen target. Reported gains mainly come from deterministic code, routing, and strict answer enforcement. Evaluated on Theory-of-Mind benchmarks rather than robots; no official code link was located as of 2026-08-13.
 - [Harness-IF](https://arxiv.org/abs/2608.11727) — Execution-grounded benchmark for operational instruction following across system prompts, project files, user instructions, tools, and skill descriptions. Against-Prior Accuracy withholds rules to separate compliance from coincidence, and a conflict pilot probes surface precedence. Coding-agent results only; no official benchmark repository was linked as of 2026-08-13.
+- [SkillMisevo / Practice Makes Unsafe](https://github.com/henrymao2004/misevolve) ([paper](https://arxiv.org/abs/2608.12851)) — Lifecycle-aware benchmark for persistent skill poisoning across Claude Code, Codex, OpenClaw, and Hermes. It separates unsafe authoring, retrieval, benign-task contamination, and fresh-session carryover; SafeEvolve repairs skill content and governs reuse. Results are digital-agent only, and the public implementation declares no repository license as of 2026-08-14.
 
 ### End-to-End Robot Learning
 
@@ -355,6 +358,8 @@ Treat upstream benchmark claims as **results under their stated protocol**, not 
 
 ### Runtime Building Blocks
 
+- [ContactGuard](https://arxiv.org/abs/2608.13438) — Pre-contact monitor for chunked visuomotor policies. An action-conditioned latent world model predicts the consequence of the policy's planned chunk, and a lightweight probe aborts when the predicted post-contact latent indicates likely failure. The authors report live real-robot abort experiments; no official code link was located as of 2026-08-14.
+- [VLA task-progress probe](https://arxiv.org/abs/2608.13474) — Linear probe that reads normalized time remaining from π0.5 residual activations and uses stalled predicted progress as a label-free OOD/runtime signal. It generalizes to unseen tasks but does not meaningfully steer the policy. Results are author-reported; no official code or probe weights were linked as of 2026-08-14.
 - [TempoWAM](https://arxiv.org/abs/2608.09492) — Plug-in execution protocol for WAM action chunks that estimates progress from current observations, instructions, remaining actions, and execution history, then decides whether to continue or replan. The authors report real-robot efficiency and success gains; no official code link was located as of 2026-08-11.
 - [ROS 2 lifecycle](https://design.ros2.org/articles/node_lifecycle.html) — Explicit node states for startup, recovery, and shutdown.
 - [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP) — Inspectable, interruptible task execution and fallback behavior.
