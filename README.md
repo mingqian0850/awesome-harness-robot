@@ -1,7 +1,7 @@
 # Awesome Harness Robot
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
-[![Last Updated](https://img.shields.io/badge/last%20verified-2026--08--14-blue)](#scope-and-curation-policy)
+[![Last Updated](https://img.shields.io/badge/last%20verified-2026--08--16-blue)](#scope-and-curation-policy)
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-lightgrey.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
@@ -46,9 +46,11 @@ The practical boundary is simple: **the model proposes; the harness decides whet
 
 ## Current Landscape
 
-Last verified: **2026-08-14**.
+Last verified: **2026-08-16**.
 
 - **Robot harnesses are becoming a research category of their own.** [Guava](https://guava-harness.github.io/) studies model-agnostic embodied tool use; [ASPIRE](https://research.nvidia.com/labs/gear/aspire/) turns execution traces into an expanding skill library; and [GaP](https://graph-robots.github.io/gap/) uses multi-agent coding plus simulation to construct and refine graph-structured robot policies.
+- **Robot middleware is being reframed as the Physical AI harness layer.** [Harness Engineering for Physical AI](https://arxiv.org/abs/2606.09416) argues that ROS 2-class middleware should compose output projection, resource isolation, and fallback transfer across control, compute, and communication. It is a position/design paper proposing a ROS 2 Harness Profile, not an implemented or experimentally validated system.
+- **Harness optimization now reaches complete robot policy repositories.** [RHO](https://arxiv.org/abs/2606.16458) uses a tool-enabled coding agent and execution feedback to evolve interpretable multi-file repositories-as-policies during training, then deploys them without test-time code generation. Its Robosuite, LIBERO-PRO, and O3DE results are author-reported and simulation-only; no official code repository was linked as of 2026-08-16.
 - **Orchestration is moving from a paper abstraction to a modular system boundary.** [RoboBRIDGE](https://arxiv.org/abs/2607.27881) separates monitoring, perception, planning, control, and robot interfaces around pretrained VLAs, while [Embodied Agents Take Control](https://arxiv.org/abs/2607.26148) directly evaluates general software-agent harnesses holding the perceive–act–verify–correct loop in zero-shot navigation.
 - **Open physical-agent runtimes are appearing.** [OpenETA](https://github.com/OpenMOSS/OpenETA) exposes planners, typed tools and skills, host-owned execution gates, fresh-observation turns, replayable trajectories, and auditable memory behind common simulation and real-robot adapters.
 - **The orchestration gap is now being measured directly.** [Physical Agency](https://arxiv.org/abs/2607.21725) wraps frozen VLAs and parameterized skills in a closed-loop planner that decomposes goals, verifies outcomes, and recovers without additional policy training.
@@ -164,6 +166,8 @@ See [Reference Architecture](docs/reference-architecture.md) for interfaces, sta
 
 ### Agentic Robot and VLA Harnesses
 
+- [Harness Engineering for Physical AI](https://arxiv.org/abs/2606.09416) — Position and systems-design paper identifying robot middleware as the Physical AI harness boundary. It proposes Projection to gate learned-model outputs, Isolation to bound inference and transmission resources, and Transfer to fall back to a verified baseline, packaged as a prospective ROS 2 Harness Profile spanning ROS 2, DDS, and Zenoh. The paper provides architecture and requirements rather than an implementation or robot experiment; no official code was linked as of 2026-08-16.
+- [RHO: Your Coding Agent is Secretly a Roboticist](https://arxiv.org/abs/2606.16458) — Robotics Harness Optimization moves Code-as-Policies search to training time: a bounded coding agent edits and evaluates multi-file repositories-as-policies using reflective environment feedback and Pareto-frontier selection. The selected repository executes without deployment-time code generation. The authors report gains on Robosuite, LIBERO-PRO, and an O3DE agent stack; all reported experiments are simulated, and no official implementation repository was linked as of 2026-08-16.
 - [OpenETA](https://github.com/OpenMOSS/OpenETA) ([paper](https://arxiv.org/abs/2608.03924), [project](https://openmoss.ai/OpenETA/)) — Open implementation of the Embodied Task Agent paradigm: a planner issues one typed world-changing tool call, a host-owned interface validates and executes it, and the world returns the result plus a fresh observation before the next decision. The Apache-2.0 repository includes simulation and real-robot adapters, reusable skills and memory, replayable logs, tests, and a UR5e integration path; benchmark and hardware results are author-reported.
 - [ENPIRE](https://research.nvidia.com/labs/gear/enpire/) ([paper](https://arxiv.org/abs/2606.19980), [analysis](sources/enpire-2606.19980.md)) — Physical-autoresearch harness with Environment, Policy Improvement, Rollout, and Evolution modules. Coding agents build reset and verification routines, revise policy or training code, run budgeted trials on one or more real robots, and exchange successful recipes through Git branches. The authors report a 99% **pass@8** rate on showcased dexterous tasks; this allows up to eight in-context retries per subtask and should not be read as 99% single-attempt success. No public implementation repository was linked as of 2026-08-03.
 - [RoboBRIDGE](https://arxiv.org/abs/2607.27881) — Five-module orchestration layer—Monitor, Perceptor, Planner, Controller, and Robot Interface—that turns pretrained VLAs or other policies into closed-loop agents. It combines rapid failure detection, hierarchical recovery, asynchronous perception, replanning, and embodiment abstraction; the authors report LIBERO, RoboCasa, and multi-platform real-robot studies. No official public code repository was located as of 2026-07-31.
