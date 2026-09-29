@@ -339,12 +339,18 @@ Two line-level edits, each driven by a metadata change detected in this block.
    sentence is still future tense — the watch-list note is unchanged.
 2. **`2608.04408`** — **recorded withdrawal reason is now wrong.** This ID
    appears in the 2026-09-28 record's withdrawal list as "withdrawn by the
-   authors 'due to issues in experimental validation'". In this block the
-   comment field was replaced by **"false information"** (latest version v3,
-   2026-09-28, 1 KB; the paper remains withdrawn). The repository records that
-   ID only inside the 2026-09-28 source file, so no README entry was touched;
-   the correction is recorded here for traceability, and the earlier record's
-   wording should be read as superseded.
+   authors 'due to issues in experimental validation'". That was v2's comment;
+   in this block the comment field was replaced by the two words **"false
+   information"**. The paper is still withdrawn — the abstract banner reads
+   "This paper has been withdrawn by De Jiang", the current version is v3
+   (2026-09-28) and is a 1 KB stub like v2 (2026-09-25), while v1 (2026-08-05,
+   6,246 KB) was the full paper — and the abstract page notes "No license for
+   this version due to withdrawn". The primary sources do not say who wrote the
+   v3 comment, so it is reported literally without attribution. The repository
+   records this ID only inside the 2026-09-28 source file, so no README entry
+   was touched; the correction is recorded here for traceability, the earlier
+   record's wording should be read as superseded, and the work should be treated
+   as withdrawn and not citable.
 
 Two further re-announcements changed titles without changing any recorded
 verdict and required no edit: `2609.28919` ("Control the Harness, Control the
@@ -445,9 +451,12 @@ Four bullets added to `README.md`:
   v1 2026-09-28) — inference-time progress-reward modeling with a proposing
   subagent and a verifying primary agent, including auditing of external reward
   models, evaluated on a semantic-mismatch benchmark, simulation policy
-  learning, and real-robot multi-screw fastening. The paper states "Code is at
-  https://github.com/midea-ai/ars", which returns **404** — promised, not
-  released. **Watch.**
+  learning, and real-robot multi-screw fastening. **Artifact status literal:**
+  the paper asserts availability in the present tense ("Code is at
+  https://github.com/midea-ai/ars"), but that URL returns **HTTP 404** — the
+  `midea-ai` organization exists with 21 public repositories, none named `ars`,
+  and GitHub and Hugging Face searches surface nothing relevant. Not a release
+  and not even a promise. **Watch.**
 - **DexAgent** (`2609.35318`, cs.RO; v1 2026-09-28) — agentic
   Human2Sim2Robot pipeline with a self-evolving tool library and property-specific
   verifiers; the project site is live but states "Code (Coming Soon!)".
