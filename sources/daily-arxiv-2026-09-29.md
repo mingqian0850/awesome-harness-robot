@@ -243,7 +243,7 @@ page, and tree claim below was verified live on **2026-09-29**.
   over all baselines on RoboMemArena, large LIBERO-PRO perturbation gains, and
   real-robot deployment on an AgileX platform and a Unitree G1. **Artifact
   status literal:** the project page is live and links code, but
-  `robofoundry2026/RoboFoundry` holds a README, one PNG, four unchecked
+  `robofoundry2026/RoboFoundry` holds a README, one PNG, three unchecked
   "Release …" TODO items, and **no LICENSE file at all** — promised, not
   released.
 - **What Stops Recursive Self-Improvement in Robotics?** (`2609.31760`,
@@ -534,9 +534,11 @@ HarnessPAI's "not yet publicly released" code) are unchanged.
   2,837 downloads), the `lyhkk/CodeActionBench` repository, the
   `RLE-Bench/RLE-Bench` repository and its leaderboard, the
   `billzhao1030/NavHarness` repository, and the RoboFoundry project page.
-  Placeholder and 404 links deliberately recorded as such were verified to fail:
-  `robofoundry2026/RoboFoundry` content, `syr-cn/PluginRSI`,
-  `midea-ai/ars`, and the CodeActionBench trajectories dataset.
+  Placeholder and 404 links deliberately recorded as such were verified in the
+  same pass: `robofoundry2026/RoboFoundry` returns 200 but its README and tree
+  were fetched directly and contain **three** unchecked "Release …" items with
+  no LICENSE file, while `syr-cn/PluginRSI`, `midea-ai/ars`, and the
+  CodeActionBench trajectories dataset return 404/401.
 - Repository licenses, sizes, creation and push dates, default branches, stars,
   and top-level trees were read from the GitHub API; Hugging Face gating,
   license, downloads, and last-modified from the Hub API; project pages and full
