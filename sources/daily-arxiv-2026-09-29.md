@@ -428,7 +428,8 @@ Four bullets added to `README.md`:
   training-free runtime layer that wraps a frozen VLA with a phase-aware finite
   state machine and an inertia-weighted Euler–Lagrange term at under 1 ms per
   control step, reporting up to +6 points success and +19.3 points stability
-  across four VLA backbones on LIBERO-Spatial. **No artifact** anywhere, and the
+  across four VLA backbones on LIBERO-Spatial, with per-task regressions on two
+  named OpenVLA tasks. **No artifact** anywhere, and the
   physical-hardware result is presented as a qualitative deployment
   demonstration. **Watch.**
 - **Find Something You Can't Do (FIND)** (`2609.32069`, cs.RO; v1 2026-09-25) —
