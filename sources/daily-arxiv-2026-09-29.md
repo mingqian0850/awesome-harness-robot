@@ -582,6 +582,14 @@ HarnessPAI's "not yet publicly released" code) are unchanged.
   required API fields live. No verdict depends on the fallback.
 - `2609.33822` has no arXiv full-text HTML (HTTP 404); it was verified from the
   PDF instead, which contains no URLs at all.
+- **Hearsay's anonymized artifact must be checked through its API, not its page.**
+  `anonymous.4open.science/r/hearsay-4E7C` answers 401 (and later 429 under load)
+  for the rendered page, which is the service's single-page-app behaviour and
+  also occurs for a random control id; the file listing at
+  `anonymous.4open.science/api/repo/hearsay-4E7C/files` returns HTTP 200 and
+  shows `LICENSE`, `LICENSE-DATA.md`, `bench/`, `human/`, `paper/`, and `scale/`
+  (≥321 files, ~8.7 MB). A later run seeing only the 401 should not conclude the
+  artifact has disappeared.
 - No conflict occurred; `git fetch origin`/`git pull --ff-only` were run before
   committing and the working branch is `main`.
 
