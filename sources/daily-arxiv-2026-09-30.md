@@ -650,6 +650,15 @@ released" code) are unchanged.
   with Hearsay on 2026-09-29, the rendered page redirects to a single-page app while
   the file API returns the real tree; a later run seeing only the redirect should
   re-check the API endpoint rather than conclude the artifact has disappeared.
+  **Link topology recorded for later runs:** the project page fetched on 2026-09-30
+  has exactly one external link, `anonymous.4open.science/r/harnessvln/README.md`
+  (file API HTTP 200, substantial tree, README declares CC BY-NC-SA 4.0), and the
+  v3 arXiv full text contains **no** GitHub link at all. A separate repository,
+  `github.com/AgibotGeneral/harnessvln` (HTTP 200; 13 stars, 1 KB, no license,
+  created and pushed 2026-09-12), holds only `index.html` and `readme.md` — it is
+  the project-page source, **not** a code release, and it is not linked from the
+  anonymized page. Do not record either object as an attributable open-source
+  release while the submission is double-blind.
 - No conflict occurred; `git fetch origin`/`git pull --ff-only` were run before
   committing and the working branch is `main`.
 
