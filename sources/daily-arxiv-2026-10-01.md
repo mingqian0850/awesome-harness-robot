@@ -633,10 +633,22 @@ Five bullets added to `README.md`:
   but "Code (coming soon)" is **unlinked text** and the GitHub repository is only
   the project-page source. **Watch.**
 - **Blackout vs. Freeze: Physical Failure Modes of VLAs under Camera Faults**
-  (`2609.39145`, cs.RO/cs.CV; v1 2026-09-30) — sim plus a real WidowX (100 trials)
-  and an MIT-licensed artifact, but the artifact is **anonymized and returns
-  HTTP 401**, and checkpoints are withheld "upon acceptance". **Watch** for
-  de-anonymization.
+  (`2609.39145`, cs.RO/cs.CV; v1 2026-09-30) — sim (LIBERO, π0.5 and GR00T,
+  150 episodes per suite per condition) plus a real WidowX (10 trials × 5
+  conditions × 2 policies = 100 trials), reporting pooled success falling
+  93.1%→28.9/13.1/5.8/3.6% under the fault conditions and a drop-versus-joint-
+  extremity dissociation. **Link topology recorded for later runs:** the artifact
+  is anonymized at `anonymous.4open.science/r/blackout-vs-freeze-vla`; the
+  browsable path returns **HTTP 401** but the file API
+  (`/api/repo/blackout-vs-freeze-vla/files`) and the raw file paths return
+  **HTTP 200** with real content (a 381 KB closed-loop harness, `.arms` condition
+  files, the WidowX training script), MIT-licensed under "Anonymous Authors" —
+  the same pattern recorded for HarnessVLN on 2026-09-30 and Hearsay on
+  2026-09-29, so a later run seeing only the 401 must re-check the API endpoint
+  rather than conclude the artifact has disappeared. It stays on **Watch** because
+  it is **not attributable** while the submission is anonymized, and checkpoints
+  and rollouts are withheld "upon acceptance"; the authors also note the
+  real-robot joint-margin pattern does not mirror simulation.
 - **ActionGuard: Tool Call Authorization under Poisoned Skills** (`2609.39450`,
   cs.CR/cs.AI; v1 2026-09-30) — harness-native `before_tool_call` authorization
   with good scale (319 injection–task pairs × 3 repeats × 5 reviewer models), but
