@@ -584,8 +584,8 @@ harness contract) is unaffected. `2609.28984` (CrossSafe) posted v2 with an
 acknowledgements-only change. The remaining 33 already-referenced IDs carry no
 field change that alters a recorded status.
 
-**Two catalogue hazards were confirmed and are recorded so later runs do not merge
-them:**
+**Four catalogue hazards were confirmed and are recorded so later runs do not
+merge them** (two affect curated entries, two affect new ones):
 
 - **NavHarness** — `2609.34276` "Towards Lifelong Embodied Navigation" (already
   curated at README line 255/563, MIT-licensed `billzhao1030/NavHarness`) and
@@ -593,6 +593,15 @@ them:**
   run) are **different papers by different authors**.
 - **RoboHarness** — `2607.18060` (added this run, no artifact) and the unrelated,
   MIT-licensed `LZY-1021/RoboHarness` at arXiv `2603.24060` share a short name.
+- **SafeVLA** — `2606.00773` SafeVLA-Bench (added this run) is unrelated to the
+  "SafeVLA" safety-alignment framework already linked in this README, and to the
+  same-named `Jatshi/SafeVLA-Bench` repository.
+- **HIDE/SEEK** — `2609.38886` (watch-listed this run) is unrelated to the
+  **Hide-and-Seek in Trajectories** runtime-monitoring paper (`2605.30834`) already
+  at README lines 248 and 930.
+
+Each of the four is keyed by arXiv ID in the README entry or watch-list note where
+it appears.
 
 ## Current Landscape additions
 
@@ -682,7 +691,11 @@ Five bullets added to `README.md`:
   reads "Paper SOON", "Code SOON" and "Data — Coming soon", the header Code button
   is `href="#"`, `huggingface.co/datasets/nanamma/HIDE` returns **HTTP 401**, and
   no repository exists. Parts of its own real-world gallery still read "Empty slots
-  await footage". **Watch** for release.
+  await footage". **Watch** for release. **Name collision:** the repository already
+  carries an unrelated **Hide-and-Seek in Trajectories** (`2605.30834`, "Discovering
+  Failure Signals for VLA Runtime Monitoring") at README lines 248 and 930 — a
+  different paper with a different benchmark and a live project page. This entry is
+  keyed to `2609.38886`; do not merge the two.
 - **Looking Back to Move Forward / TeV** (`2609.39038`, cs.RO; v1 2026-09-30) — a
   deployment-time verification harness that adds a learned temporal token and a
   contrastive energy verifier (<0.15% extra parameters) to a frozen flow-matching
