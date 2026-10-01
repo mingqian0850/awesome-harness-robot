@@ -239,8 +239,13 @@
   `runtime-contracts/teacher-traces`, 6,000 rows); the authors state the raw
   teacher responses and decoding seeds are not released, so the released traces —
   not a re-run — are what fixes the reported values. Digital agents, no robot
-  experiment; results author-reported. **Note the version history:** v1 is a
-  different paper with a different author list and a 3.5× headline; cite v3.
+  experiment; results author-reported. **Note the version history and which
+  artifact to cite:** v1 is a different paper with a different author list, a
+  single task family and a 3.5× headline, and it pointed at a **different,
+  still-live repository** — `github.com/mrcabbage972/agents-learn-runtime`
+  (HTTP 200 on 2026-10-01). The code, datasets and adapters linked here are v3's
+  `TieuDaoChanNhan/runtime-contract` set, which is the artifact for the current
+  title; a later run should not cite both as this entry's release.
 
 ### Robot Agent Systems — Agentic Robot and VLA Harnesses
 
