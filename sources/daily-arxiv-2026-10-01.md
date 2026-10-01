@@ -786,3 +786,16 @@ Task-owned files committed on `main`: `README.md`,
 (`docs/reference-architecture.md`, `docs/ring-harness.png`, `handoff.md`,
 `.scratch/`) were left untouched and unstaged. No branches, no pull requests, no
 force-push.
+
+- **Curation commit:** `898864e` — "Curate October 1 robot harness research"
+  (`README.md` + this record; 22 entries added, 5 Current Landscape bullets, three
+  existing entries corrected).
+- **Sync:** the working branch was confirmed as `main`; `git fetch origin` and
+  `git pull --ff-only` were run before committing (already up to date at `71ac0fe`).
+- **Push:** `git push origin HEAD:main` advanced `71ac0fe..898864e`, and
+  `git ls-remote origin refs/heads/main` returned the same SHA as local `HEAD`.
+- **SSH workaround used:** the documented `Bad owner or permissions on
+  /etc/ssh/ssh_config.d/20-systemd-ssh-proxy.conf` failure occurred on the first
+  `git fetch`; retrying with `GIT_SSH_COMMAND='ssh -F /dev/null'` succeeded for
+  fetch, pull, push, and `ls-remote`. The user's key and `known_hosts` were
+  unaffected.
