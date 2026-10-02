@@ -631,11 +631,15 @@ updated to 2026-10-02.
   artifact is a YouTube video. Excluded.
 - **DuoMind** (`2610.02161`, cs.AI/cs.RO) — repository says "code coming soon"
   and the dataset link 404s; simulation-only. **Watch.**
-- **Bounded-Fidelity Sim-as-Demo-Stage** (`2610.00008`, cs.AI/cs.RO) — has a real
-  Apache-2.0 reference implementation and replication data and is honestly
-  labelled digital-only, but the contribution (mocap handoff for governance
-  benchmarks) is narrow enough that it is recorded as **deferred**, not included,
-  in this pass.
+- **Bounded-Fidelity Sim-as-Demo-Stage** (`2610.00008`, cs.AI/cs.RO) — an
+  Apache-2.0 reference implementation and replication data are genuinely live
+  (1 commit, 2026-06-26, 0★) and the work is honestly labelled digital-only, but
+  the contribution (mocap handoff for governance benchmarks) is narrow enough
+  that it is recorded as **deferred**, not included, in this pass.
+  **arXiv ID/date anomaly to remember:** this record carries an October `2610.`
+  ID but `published`/`updated` of **2026-07-09** (single version, confirmed
+  present in the cs.RO 2026-10 listing), so ID-prefix heuristics must not be used
+  to infer announcement date.
 - **Ego2Act** (`2610.01092`, cs.CV/cs.RO) — a fully released evaluation harness
   (MIT code, two ungated CC-BY-4.0 datasets, live page) but its subject is
   egocentric *video generation*, not robot execution; excluded by the standing
