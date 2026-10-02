@@ -121,7 +121,7 @@
 
 ## Included (README updates)
 
-23 entries were added, grouped as they appear in the README.
+24 entries were added, grouped as they appear in the README: 23 in the curation commit, plus `2610.01939` (PyRUA-Lean), which the first screening pass under-weighted and which the follow-up commit recorded below promotes.
 
 ### Harnesses and Development Platforms — General Harness Design and Self-Improvement
 
@@ -279,6 +279,28 @@
   hardware (single, dual, GARMI) plus simulation; author-reported.
 
 ### Robot Agent Systems — Agentic Robot and VLA Harnesses
+
+- **Fewer Tokens, Better Action / PyRUA-Lean** (`2610.01939`, cs.CV; v1
+  2026-10-01) — an interactive code-execution harness for robot agents and the
+  best harness fit of its verification group: the agent gets exactly one tool,
+  `python(code)`, over a persistent namespace holding `robo`, and composes
+  classical robot primitives with learned VLA policies into cells that run
+  conditional checks and local retries inside the cell, while **selective
+  observation** returns only the images and state a cell explicitly requests
+  rather than streaming every camera frame. The runtime owns the context layer
+  (`robo.world_map`, `robo.segment`, `robo.state`), the model adapter (`hosts/`,
+  fallback catalogs, `claude_runtime.py`), the agent loop (`runner.py`,
+  `sandbox.py`) and an MCP server, driving RPent stacks through Codex CLI or
+  Claude Code. Reported: success 63.1% → 71.7% under equal LLM-call budgets
+  (≈14% relative, equal or higher on all nine sub-suites), 49% fewer LLM calls
+  and 65% fewer input tokens on instances both agents solved, and 1.5×–4.5× fewer
+  input tokens per solved episode over 700 simulated instances (LIBERO-PRO,
+  RoboTwin 2.0, RoboCasa365). **Artifact:** Apache-2.0 `DAGroup-PKU/PyRUA-Lean`
+  (2 commits, 5★) with harness, MCP server, host adapters, environments, docs and
+  tests, plus a live project page. Caveats: simulation-only, one run per agent per
+  instance by the authors' own limitation statement, and the comparison depends on
+  the closed GPT-6 Astra planner and RPent primitive libraries, so the headline is
+  not independently reproducible.
 
 - **Recova** (`2610.01178`, cs.RO; v1 2026-10-01) — the batch's strongest
   recovery-harness story: an agent diagnoses failures in a reconstructed digital
@@ -541,7 +563,7 @@
 
 ## Current Landscape additions
 
-Ten bullets were appended to `## Current Landscape`, covering: harness
+Eleven bullets were appended to `## Current Landscape`, covering: harness
 optimization moving into the curriculum and up to the harness/model boundary
 (ActiveSaddler, Harness Annealing); harness choice as a controlled variable
 (Finding the Right Fit, VeriHarness); small-model competence re-attributed to
@@ -551,8 +573,9 @@ Zero2Repo); auditable harness artifacts shipping their own failure record
 (Kepler); recovery split into detection and restoration (Recova, Rewind-IL);
 robot benchmarks separating selection from execution and scoring reliability
 (HumanoidToolBench, DexHoldem, MIKASA-Robo-VLA); verification artifacts as attack
-surfaces (False Prophets, POEF); and frozen-backbone efficiency contracts with
-real releases (RoboActualizer, Dex-X). The `last verified` badge and line were
+surfaces (False Prophets, POEF); frozen-backbone efficiency contracts with
+real releases (RoboActualizer, Dex-X); and robot-agent harnesses shipping as
+runnable runtimes with pull-based observation (PyRUA-Lean). The `last verified` badge and line were
 updated to 2026-10-02.
 
 ## Rejected / watch list
@@ -700,8 +723,11 @@ updated to 2026-10-02.
   extension with an evaluation protocol and data-collection harness), which is
   recorded here as a **deferred benchmark candidate** for a later run rather than
   added under a paper whose own artifact is a placeholder.
-- **DynamicVLA** (`2601.22153`, cs.CV/cs.RO), **Fewer Tokens, Better Action**
-  (`2610.01939`, cs.CV), **Kinematic MeanFlow** (`2610.00864`; repository 404),
+- **DynamicVLA** (`2601.22153`, cs.CV/cs.RO; mature S-Lab-Licence-1.0 repository
+  at 343★/320 commits with **gated** HF dataset and weights, NeurIPS 2026 — the
+  strongest remaining promotion candidate, held back because the release is
+  source-available rather than OSI-licensed and every asset is gated),
+  **Kinematic MeanFlow** (`2610.00864`; repository 404),
   **Completion Aware Guidance** (`2610.01559`; no URL), **Supervise What Decides
   Success** (`2610.01224`; no URL), **FutureWorlds** (`2610.01019`; weights
   unpublished, no licence, digital-only metrics), **Measuring Asset and Scene
@@ -760,12 +786,12 @@ updated to 2026-10-02.
 ## Validation performed
 
 - Markdown structure checked: heading hierarchy, list rendering, absence of
-  malformed bullets and unbalanced link parentheses across all 23 new entries and
-  10 new landscape bullets (`README.md` now 1,120 lines, 40 headings).
+  malformed bullets and unbalanced link parentheses across all 24 new entries and
+  11 new landscape bullets (`README.md` now 1,123 lines, 40 headings).
 - `git diff --check` reports no whitespace errors.
 - Every included ID was grepped after insertion: each appears once in the main
   list and, where applicable, once in the Current Landscape; no duplicate entry
-  was created, and none of the 23 IDs or their titles was present in `README.md`,
+  was created, and none of the 24 IDs or their titles was present in `README.md`,
   `docs/*.md` or `sources/*.md` before this run.
 - Dates and categories cross-checked against the arXiv records: all 23 entries
   carry their true version history (v1 date and latest version date), and the two
@@ -836,9 +862,16 @@ force-push.
   `docs/reference-architecture.md` (modified), `docs/ring-harness.png` and
   `handoff.md` (untracked), and `.scratch/` (untracked scratch tree) all remain
   unstaged and uncommitted.
-- **Record-only follow-up commits:** `109b3cb` (SSH workaround and this SHA
-  block) and `0c04164` (secondary robot-infrastructure screen and the
-  `2609.36081` ID flag) touched only this file. Each was pushed to `origin/main`,
+- **Follow-up commits:** the promotion of PyRUA-Lean (`2610.01939`) in the
+  commit immediately following `08746e3` updated **both** `README.md` (24th entry plus an eleventh
+  Current Landscape bullet) and this record, after the E-group dossier showed
+  Apache-2.0 code, an MCP server and a pull-based observation contract that the
+  first keyword pass had under-ranked; no other follow-up touched `README.md`.
+  The remaining record-only commits (`109b3cb` SSH workaround and this SHA block,
+  `0c04164` secondary robot-infrastructure screen and `2609.36081` ID flag,
+  `5c64ca3` FloWright name, `07dc691` RHASafety/Alignment-Flywheel detail,
+  `1e92fb1` the `2610.00008` ID/date anomaly, `0039f4e` TRUST and MIKASA notes,
+  and the RIWM/ACE/PARTS revision detail) touched only this file. Each was pushed to `origin/main`,
   and `git ls-remote origin refs/heads/main` confirmed the remote tip equalled
   local `HEAD` immediately after every push; the tip of `main` after the last
   record commit is this run's final state.
