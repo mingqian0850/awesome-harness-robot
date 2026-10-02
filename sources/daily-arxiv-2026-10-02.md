@@ -578,9 +578,11 @@ updated to 2026-10-02.
 - **EvoGen-Harness** (`2610.00383`, cs.LG) — harness evolution for image
   generation: non-agent, non-robot, **no artifact and no availability statement**.
   Out of scope.
-- **It Takes Workflows to Evolve Better Workflows** (`2610.01026`, cs.AI/cs.CL) —
-  the repository is a **scaffold** (README, LICENSE, config only; the `harness/`
-  and `flow/` paths 404). **Watch.**
+- **It Takes Workflows to Evolve Better Workflows** (system name **FloWright**;
+  `2610.01026`, cs.AI/cs.CL; v1 2026-10-01) — in scope on mechanism and reported
+  result (+7.41%), but the repository is a **scaffold** (README, LICENSE and
+  config only; the `harness/` and `flow/` paths 404), so it fails the literal
+  artifact bar. **Watch.**
 - **LabBook** (`2610.00675`, cs.AI/cs.LG) — repository README reads "Coming
   Soon…" with LICENSE only. **Watch.**
 - **Agent Error Dataset** (`2609.40111`, cs.AI/cs.CL) — 50,000 error–diagnosis
