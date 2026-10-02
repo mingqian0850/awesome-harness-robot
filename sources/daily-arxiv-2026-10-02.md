@@ -370,7 +370,11 @@
   tasks, an *information gap* — the provably cue-absent interval — 28 of which
   exceed the 16-frame window of the widest fixed-context VLA surveyed. 22,500
   oracle trajectories, 10 memory types, 6M+ transitions, RLDS 287.4 GiB plus a
-  LeRobotDataset v3 release, with the evaluation protocol in code. The π0.5
+  LeRobotDataset v3 release (the RLDS repository's Hugging Face viewer does not
+  index its TFRecord shards, so the LeRobot release or the docs site is the
+  primary download path; the README's ICLR-2026 badge refers to the original
+  32-task MIKASA-Robo, and this 90-task extension states no venue), with the
+  evaluation protocol in code. The π0.5
   reference baseline (14 tasks, no history, no memory module) reaches
   0.211 ± 0.044 mean success, and the authors flag the Long split as confounded
   by open-loop chunking. **Artifact:** MIT repo (139★) plus two ungated MIT HF
@@ -611,9 +615,11 @@ updated to 2026-10-02.
   placeholder** saying both paper and code are "coming soon" with zero `href`s.
   The artifact claim is false as written. **Watch.**
 - **TRUST / When Reasoning Helps Action** (`2610.00601`, cs.AI/cs.RO) — CoT
-  monitoring and steering for VLA policies is on-theme, but the evidence is
-  digital/simulation with VLM-judged labels and the project page says "Code Coming
-  Soon". **Watch.**
+  monitoring and steering for VLA policies is on-theme, and its reasoning-quality
+  metric rises 75.9% → 90.0%, but **closed-loop manipulation task success is
+  essentially unchanged**, the correctness labels come from VLM judges (digital
+  even though the underlying policy is a VLA), and the project page says "Code
+  Coming Soon". **Watch** on evidence quality rather than topic.
 - **Is Success All You Need?** (`2610.01351`, cs.RO) — the footnote claims "Full
   code … is made available" while the linked repository is an **empty 1 KB
   placeholder** with no licence and `main` returning 404. Excluded literally.
