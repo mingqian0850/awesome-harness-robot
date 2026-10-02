@@ -507,10 +507,28 @@
 - **ACE** (`2607.04162`; new version 2026-10-01): the revision changes the
   in-document title and raises reported figures (50/70 → 70/80) but has **no
   artifact of any kind**; remains excluded.
-- **WholeBodyWAM** (`2609.18197`) and **PARTS** (`2609.21788`): new versions add a
-  project page and appendices respectively. WholeBodyWAM's page uses a disabled
-  `href="#"` for code (not a release); PARTS states a plain-text promise with no
-  link. Both remain watch-list items.
+- **WholeBodyWAM** (`2609.18197`) and **PARTS** (`2609.21788`): new versions add
+  a project page and appendices respectively. WholeBodyWAM's v2 is
+  content-cosmetic (+53 characters; abstract and headings identical) and its page
+  uses a disabled `href="#"` for code (not a release). PARTS' v2 is substantive
+  in text (+10,050 characters of appendices, including one on *Human Contracts
+  and Executable Scaffolding*, which is why it stays on watch rather than being
+  dropped) but its code is a plain-text promise with no link. Both remain
+  watch-list items.
+- **Rethinking World Models for Safety-Critical Embodied Systems (RIWM)**
+  (`2609.03774`, cs.AI/cs.RO; v1 2026-09-03 → **v2 2026-10-01**) — carried as
+  "watch (perspective)" since 2026-09-04. The v2 is marginal: the abstract is
+  unchanged and exactly one section (§3.5, illustrative applications) was added,
+  so the 6-page perspective contributes no artifact and no measurement.
+  **Watch-lite**; do not re-open on the strength of the revision alone.
+- **ACE** (`2607.04162`, cs.RO; v1 2026-07-05 → **v2 2026-09-30**) — never
+  previously recorded in this repository. The v2 is the batch's largest claim
+  change: the in-document title becomes "Semantic Task Composition for Tabletop
+  Manipulation via Tracked Pick-and-Place Masks" while arXiv metadata still serves
+  the old title, the text now calls the method an *agentic manipulation harness*,
+  and reported figures rise from 50%/70% to 70%/80% (55%/70% without persistent
+  context). **No artifact of any kind** exists — no page, code, weights or data —
+  so it is recorded here as a watch item rather than an entry.
 - **SyzHarness** (`2609.23889`): the new version is a **typography-only** change
   (hyphenation in "LLM-only", "bug-critical"). Non-substantive.
 - **2609.35674**: the withdrawal notice now states the reason (undisclosed
