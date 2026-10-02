@@ -751,9 +751,20 @@ Task-owned files committed on `main`: `README.md`,
 `.scratch/`) were left untouched and unstaged. No branches, no pull requests, no
 force-push.
 
-- **Curation commit:** see the repository log for the SHA — "Curate October 2
-  robot harness research".
+- **Curation commit:** `47a17b1` — "Curate October 2 robot harness research"
+  (`README.md` + this record; 23 entries added, 10 Current Landscape bullets, the
+  `last verified` date advanced to 2026-10-02).
 - **Sync:** the working branch was confirmed as `main`; `git fetch origin` and
-  `git pull --ff-only` were run before committing.
-- **Push:** `git push origin HEAD:main`; the remote SHA was confirmed equal to
-  local `HEAD` afterwards.
+  `git pull --ff-only` were run before committing (already up to date at
+  `f7560fe`).
+- **Push:** `git push origin HEAD:main` advanced `f7560fe..47a17b1`, and
+  `git ls-remote origin refs/heads/main` returned the same SHA as local `HEAD`.
+- **SSH workaround used:** the documented `Bad owner or permissions on
+  /etc/ssh/ssh_config.d/20-systemd-ssh-proxy.conf` failure occurred on the first
+  `git fetch`; retrying with `GIT_SSH_COMMAND='ssh -F /dev/null'` succeeded for
+  fetch, pull, push, and `ls-remote`. The user's key and `known_hosts` were
+  unaffected.
+- **Unrelated user changes verified untouched after the push:**
+  `docs/reference-architecture.md` (modified), `docs/ring-harness.png` and
+  `handoff.md` (untracked), and `.scratch/` (untracked scratch tree) all remain
+  unstaged and uncommitted.
