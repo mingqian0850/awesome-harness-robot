@@ -638,6 +638,32 @@ updated to 2026-10-02.
   (MIT code, two ungated CC-BY-4.0 datasets, live page) but its subject is
   egocentric *video generation*, not robot execution; excluded by the standing
   scope rule on video-generation work with no robot/VLA harness contract.
+- **Secondary robot-infrastructure screen (nine further records reviewed in
+  detail; all recorded here so a later run does not re-litigate them):**
+  **ALFRED** (`2610.01477`, cs.AR/cs.CV/cs.RO) is the batch's sharpest integrity
+  finding — it uses the strongest "open source / released in full" language while
+  its cited `CiaranJohnson/ALFRED` URL returns 404 (HTML and API), its
+  `ForestYear3D` repository also 404s with code described as kept private, and
+  its dataset is "coming soon"; it must not be recorded as open source.
+  **STARS** (`2609.40245`, cs.LG/cs.RO) has an **unfilled project-page
+  template** (literal `github.com/ORG/STARS`, `arxiv.org/abs/XXXX.XXXXX`) and its
+  arXiv abstract is the *wrong paper's* (SocialNav-SUB's) — do not curate; note
+  that the neighbouring SocialNav-SUB (`2509.08757`, CoRL 2025) is genuinely open
+  but belongs to a different paper and batch. **EvolvingNav** (`2609.39166`,
+  cs.AI) has real code committed 2026-10-01 and the batch's strongest
+  state/timing/verification runtime design (predictive 4D belief, arrival-time
+  forecasting, evidence de-duplication), but EvoWorld-Bench (54 scenes, 803,680
+  tasks) is **not released** and the repository carries **no LICENSE** — top
+  watch item for a code/data release. **TacDyn-WAM** (`2610.00638`, cs.RO) —
+  project page live but Code is a disabled "Code is coming soon" span. **ReCo**
+  (`2610.01612`, cs.RO), **FlashNav** (`2606.15846`, cs.RO) and **HAMA**
+  (`2610.00897`, cs.RO) — no artifact of any kind. **Dyna3** (`2610.01286`) and
+  **CLoSeR** (`2610.01927`) — cs.CV reconstruction work whose claimed repository
+  (`MoyangLi00/CLoSeR`) returns 404. **ID flag:** `2609.36081`, which the
+  keyword screen surfaced as a robot-adjacent candidate, resolves to an unrelated
+  continual-learning paper ("Early Learning Shapes Later Directions of
+  Representation Change in Continual Learning"); no robot paper exists at that ID,
+  so a later run should not chase it.
 - **ActiveWAM** (`2610.01698`, cs.RO) — the model's own repository is an
   unchecked TODO stub with no licence and the project page says "Coming soon";
   the reusable asset is **RoboTwin-AV** (MIT, 237 commits, 50-task active-vision
