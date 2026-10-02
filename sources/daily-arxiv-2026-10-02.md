@@ -682,14 +682,26 @@ updated to 2026-10-02.
   policy papers whose artifact status does not clear the bar this pass. Deferred
   individually, not rejected as a class.
 - **Benchmarking the Safety of LLMs for Robotic Health Attendant Control**
-  (`2604.26577`, cs.AI/cs.CY/cs.RO) — the 2026-10-02 OAI entry is a
-  **metadata-only re-announcement** (latest version remains v2, 2026-07-24; the
-  journal publication landed 2026-09-30), the MIT claim is **unbacked** (no
-  LICENSE file), and the evidence is simulation-only in a health-attendant
-  domain. **Watch.**
-- **The Alignment Flywheel** (`2603.02259`, cs.LG/cs.MA/cs.RO) — real MIT
-  repository (18 commits) but governance-centric multi-agent demos with no robot
-  or embodied contract. Deferred.
+  (`2604.26577`, cs.AI/cs.CY/cs.RO; R. Soc. Open Sci. 13(9):261022, online
+  2026-09-30) — the 2026-10-02 OAI entry is a **metadata-only re-announcement**
+  (latest version remains v2, 2026-07-24, with `created` = 2026-07-24 and absent
+  from the 2026-10-01 harvest), so nothing new was published today. The content is
+  a substantial simulation-only safety benchmark (270 instructions across 72 LLMs;
+  mean violation rate **54.4%**, proprietary 23.7% vs open-weight 72.8%) whose
+  repository `kztakemoto/RHASafety` is real (5 commits, pushed 2026-09-30) but
+  whose README **claims MIT while `LICENSE` returns 404**; scoring is
+  response-level with an LLM judge spot-checked on 45 responses, not physical
+  execution. **Watch** — a promotion candidate if the licence is fixed and the
+  contract is extended past response-level violation.
+- **The Alignment Flywheel** (`2603.02259`, cs.LG/cs.MA/cs.RO; v3 2026-10-01) —
+  the strongest *reusable governance contract* in the safety group: a real
+  MIT-licensed repository (`decide-ugent/Alignment-Flywheel`, 18 commits, 27.9 MB,
+  API-confirmed licence) providing an Oracle interface, enforcement with
+  fail-closed behaviour, signed batches, staged rollout and rollback. Deferred
+  rather than rejected only because the evidence is digital demos on an IIRL grid
+  and a clinical proxy, and the authors state there is no production or clinical
+  validity claim; a later run can promote it as a runtime-governance entry on the
+  strength of the contract alone.
 - **Out of scope by standing rule:** the remaining uncurated records in the block
   — generic manipulation, locomotion, navigation, grasping, world-model,
   driving, medical, video-generation and perception-only papers without a
