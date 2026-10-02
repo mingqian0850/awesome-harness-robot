@@ -794,3 +794,9 @@ force-push.
   `docs/reference-architecture.md` (modified), `docs/ring-harness.png` and
   `handoff.md` (untracked), and `.scratch/` (untracked scratch tree) all remain
   unstaged and uncommitted.
+- **Record-only follow-up commits:** `109b3cb` (SSH workaround and this SHA
+  block) and `0c04164` (secondary robot-infrastructure screen and the
+  `2609.36081` ID flag) touched only this file. Each was pushed to `origin/main`,
+  and `git ls-remote origin refs/heads/main` confirmed the remote tip equalled
+  local `HEAD` immediately after every push; the tip of `main` after the last
+  record commit is this run's final state.
