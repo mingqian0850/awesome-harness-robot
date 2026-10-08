@@ -13,6 +13,8 @@ This list is intentionally smaller than a paper dump. It prioritizes official co
 
 ## Contents
 
+> Incremental curation checked 2026-10-08: instruction-following evaluation, attention monitoring, and tactile lift gating; historical entries retain their earlier verification scope.
+
 - [What Counts as a Robot Harness?](#what-counts-as-a-robot-harness)
 - [Current Landscape](#current-landscape)
 - [Reference Architecture](#reference-architecture)
@@ -312,6 +314,8 @@ The slow semantic loop and fast motor loop should not share one unconstrained cl
 See [Reference Architecture](docs/reference-architecture.md) for interfaces, state machines, safety gates, and an implementation checklist.
 
 ## Harnesses and Development Platforms
+
+- [Deep Agents](https://github.com/langchain-ai/deepagents) — LangGraph-based agent harness with isolated subagent contexts, filesystem backends, context compression, persistent memory, and human review hooks; useful as an inspectable orchestration reference, with robot interfaces and control timing requiring separate integration (repository and README checked 2026-10-05).
 
 ### General Harness Design and Self-Improvement
 
@@ -795,6 +799,8 @@ These models are ingredients, not robot policies. A harness still needs geometri
 
 ## Datasets and Data Infrastructure
 
+- [SPIDER retarget_full](https://huggingface.co/datasets/retarget/retarget_full) — Released on 2026-09-22 with 7,876 successful right-hand trajectories from 2,885 source episodes across four source datasets and four robot hands, including recorded actions and portable scenes; the dataset card describes successful-only selection and saved-state replay validation, so it does not establish an unbiased success rate or dynamic control replay (card checked 2026-10-05).
+
 ### Multi-Robot and Foundation-Model Data
 
 - [Open X-Embodiment](https://robotics-transformer-x.github.io/) — Large cross-embodiment collection assembled from many institutions and robot platforms.
@@ -824,6 +830,8 @@ These models are ingredients, not robot policies. A harness still needs geometri
 **Do not convert too early.** Preserve raw timestamps, calibration, frame IDs, controller state, dropped-frame indicators, and operator interventions before producing a normalized training view.
 
 ## Benchmarks and Evaluation
+
+- [Encoded but Not in Control](https://arxiv.org/abs/2610.06235) — Tests language grounding by changing instructions while keeping scenes fixed; target substitution exposes scene-driven behavior that nominal task success can hide, making this a useful instruction-following evaluation protocol for a robot harness (2026-10 preprint; implementation not verified).
 
 ### Manipulation and VLA
 
@@ -956,7 +964,12 @@ Treat upstream benchmark claims as **results under their stated protocol**, not 
 
 ## Runtime, Safety, and Observability
 
+- [LeRobot RTC modes](https://github.com/huggingface/lerobot/blob/main/docs/source/rtc.mdx) — The main-branch deployment guide distinguishes inference-time `guided` RTC from `trained` prefix conditioning for compatible Pi05 checkpoints, including checkpoint delay limits and rollout queue constraints; pin the implementation version before transferring these settings to a deployment (source checked 2026-10-05).
+
 ### Runtime Building Blocks
+
+- [OGAM](https://arxiv.org/abs/2610.05878) — Object-Grounded Attention Monitoring compares policy attention with successful reference episodes using dynamic time warping and conformal calibration to trigger early stops; this research monitor requires attention access and task calibration, and its reported stopping rates are protocol-specific (2026-10 preprint; implementation not verified).
+- [Temporal Visuo-Tactile Learning for Dexterous Grasp Stability](https://github.com/lasr-lab/dexterous-grasp-stability) — Predicts post-lift stability from pre-lift vision, proprioception, and touch to gate lifting versus regrasping; the public repository provides data utilities, while both it and the project page still mark the dataset as coming soon despite the [paper abstract](https://arxiv.org/abs/2610.10283) saying it is available (checked 2026-10-08).
 
 - [ContactGuard](https://arxiv.org/abs/2608.13438) — Pre-contact monitor for chunked visuomotor policies. An action-conditioned latent world model predicts the consequence of the policy's planned chunk, and a lightweight probe aborts when the predicted post-contact latent indicates likely failure. The authors report live real-robot abort experiments; no official code link was located as of 2026-08-14.
 - [VLA task-progress probe](https://arxiv.org/abs/2608.13474) — Linear probe that reads normalized time remaining from π0.5 residual activations and uses stalled predicted progress as a label-free OOD/runtime signal. It generalizes to unseen tasks but does not meaningfully steer the policy. Results are author-reported; no official code or probe weights were linked as of 2026-08-14.
