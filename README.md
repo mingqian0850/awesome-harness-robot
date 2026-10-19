@@ -27,6 +27,7 @@ This list is intentionally smaller than a paper dump. It prioritizes official co
 - [Simulation and Digital Twins](#simulation-and-digital-twins)
 - [Runtime, Safety, and Observability](#runtime-safety-and-observability)
 - [Practical Starter Stacks](#practical-starter-stacks)
+- [Agent Manipulation Learning Roadmap (中文)](docs/agent-manipulation-roadmap.zh-CN.md)
 - [Surveys and Reading Lists](#surveys-and-reading-lists)
 - [Contributing](#contributing)
 
@@ -1072,8 +1073,11 @@ Correlate every semantic decision, inference call, action chunk, safety decision
 
 ## Practical Starter Stacks
 
+For readers with ROS/manipulator experience who want to start in simulation, see the [Agent Manipulation Learning Roadmap (中文)](docs/agent-manipulation-roadmap.zh-CN.md). It covers an eight-week project from typed tools and execution feedback to failure recovery, procedural skill memory, action-policy learning, and paired evaluation. The [source record](sources/agent-manipulation-roadmap-2026-10-19.md) documents the focused verification scope; this is a learning plan, not a reproduced benchmark result.
+
 | Goal | Suggested stack | Why |
 | --- | --- | --- |
+| Build a manipulation agent in simulation | robosuite + one VLM agent + typed skill tools + result checks + episode traces; add ACT and LIBERO after the baseline | Establishes control and recovery first, then separates skill-memory gains from action-policy learning; environment adapters and version isolation are required. |
 | Learn on an affordable arm | SO-101 + LeRobot + ACT baseline + SmolVLA + LeRobotDataset | Low entry cost; one ecosystem for capture, training, and deployment. |
 | Reproduce VLA papers in simulation | vla-evaluation-harness + LIBERO + OpenVLA-OFT / π0.5 / GR00T / MolmoAct 2 | Isolates dependencies and makes model/benchmark comparisons explicit. |
 | Build a research VLA | StarVLA or RoboVLMs + LeRobot/RLDS data + LIBERO/ManiSkill | Modular backbones and action heads with reusable evaluation. |
