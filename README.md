@@ -1,5 +1,7 @@
 # Awesome Harness Robot
 
+[数据与工业操作学习补充 · 中文](docs/robot-data-contract.zh-CN.md) · [English](docs/robot-data-contract.en.md)
+
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![Last Updated](https://img.shields.io/badge/last%20verified-2026--10--02-blue)](#scope-and-curation-policy)
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-lightgrey.svg)](LICENSE)
