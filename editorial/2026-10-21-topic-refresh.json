@@ -1,0 +1,41 @@
+{
+  "reviewed_at": "2026-10-21",
+  "topic": "Robot harness updates: from tool calls to verifiable execution",
+  "source_urls": [
+    "https://arxiv.org/abs/2610.02196v2",
+    "https://arxiv.org/abs/2610.04929v2",
+    "https://arxiv.org/abs/2610.20442",
+    "https://github.com/robot-agent-exploration/rax/blob/2652c73f51514cbb84ef0fdf5a8aee2ba5b53fb7/docs/REAL_ROBOT_ADAPTATION.md",
+    "https://github.com/robot-agent-exploration/rax/tree/2652c73f51514cbb84ef0fdf5a8aee2ba5b53fb7",
+    "https://github.com/robotuse-team/RobotUse/blob/60bdf7b31b9a9a45dbc4809d678c008c724f465b/src/agent/playbook/loader.py",
+    "https://github.com/robotuse-team/RobotUse/blob/60bdf7b31b9a9a45dbc4809d678c008c724f465b/src/backend/controller.py",
+    "https://robotuse-team.github.io/",
+    "https://sirui-xu.github.io/InterEvolve/"
+  ],
+  "validation_scope": "Primary-source inspection and document checks; no upstream execution.",
+  "preserved": "Historical review dates, automated feeds and repository visibility.",
+  "paper_records": [
+    {
+      "id": "http://arxiv.org/abs/2610.02196v2",
+      "title": "InterEvolve: Test-Time Evolution of Reward Programs for Humanoid Loco-Manipulation",
+      "published": "2026-10-01T17:59:40Z",
+      "updated": "2026-10-04T03:52:14Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2610.20442v1",
+      "title": "Towards Agentic Robots: Model, Data, Environment, and Harness",
+      "published": "2026-10-14T16:32:22Z",
+      "updated": "2026-10-14T16:32:22Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2610.04929v2",
+      "title": "RobotUse: Allocating Computation, Context, and Decisions",
+      "published": "2026-10-04T04:15:33Z",
+      "updated": "2026-10-06T05:04:47Z"
+    }
+  ],
+  "code_revisions": {
+    "robot-agent-exploration/rax": "2652c73f51514cbb84ef0fdf5a8aee2ba5b53fb7",
+    "robotuse-team/RobotUse": "60bdf7b31b9a9a45dbc4809d678c008c724f465b"
+  }
+}

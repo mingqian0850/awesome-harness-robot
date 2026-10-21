@@ -1,5 +1,7 @@
 # Awesome Harness Robot
 
+[主题最新进展 · 2026-10-21 · 中文](docs/topic-progress-2026-10-21.zh-CN.md) · [English](docs/topic-progress-2026-10-21.en.md)
+
 [数据与工业操作学习补充 · 中文](docs/robot-data-contract.zh-CN.md) · [English](docs/robot-data-contract.en.md)
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
