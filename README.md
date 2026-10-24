@@ -17,7 +17,7 @@ This list is intentionally smaller than a paper dump. It prioritizes official co
 
 ## Contents
 
-> Incremental curation checked 2026-10-24, after a 21-day catch-up covering announcements from 2026-10-03 to 2026-10-23: harness measurement and attribution studies, robot-agent runtimes, video-to-simulation evaluation, a harness–inference-engine interface, and permission escalation through approved allow-rules. A second 2026-10-24 pass re-screened the whole 2026-10-20 → 2026-10-22 announcement tail — arXiv had not yet indexed 2026-10-23 — and added a formal execution-harness safety result, VLA runtime monitors and memory, replayable agent diagnosis, and four benchmark artifacts. Historical entries retain their earlier verification scope.
+> Incremental curation checked 2026-10-24, after a 21-day catch-up covering announcements from 2026-10-03 to 2026-10-23: harness measurement and attribution studies, robot-agent runtimes, video-to-simulation evaluation, a harness–inference-engine interface, and permission escalation through approved allow-rules. A second 2026-10-24 pass re-screened the whole 2026-10-20 → 2026-10-22 announcement tail — arXiv had not yet indexed 2026-10-23 — and added a formal execution-harness safety result, VLA runtime monitoring and memory, replayable agent diagnosis, and three benchmark artifacts (one shipping a released judge model). Historical entries retain their earlier verification scope.
 
 - [What Counts as a Robot Harness?](#what-counts-as-a-robot-harness)
 - [Current Landscape](#current-landscape)
