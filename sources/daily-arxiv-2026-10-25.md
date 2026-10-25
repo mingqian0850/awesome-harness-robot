@@ -55,11 +55,10 @@
   rather than from the previous run's shortlist. (b) Abstract review of **15** shortlisted records.
   (c) Artifact verification of **12** against live sources: GitHub REST metadata (licence, size, creation and
   push dates, tree listing), raw `README.md`/`LICENSE`/`checkpoints.json`, the Hugging Face model API
-  (gating, licence tags, file list) and the project pages. (d) Full-text search of **8** arXiv HTML renderings
-  for release statements and repository URLs, because three of the six inclusions carry no link in their API
-  metadata.
+  (gating, licence tags, file list) and the project pages. (d) Full-text search of **9** arXiv HTML renderings
+  for release statements and repository URLs, because several inclusions carry no link in their API metadata.
 - **Deduplication.** Every shortlisted ID and title was grepped across `README.md`, `docs/`, and `sources/`
-  before inclusion — none of the six was present. Name collisions were checked explicitly: **SCOPE**
+  before inclusion — none of the nine was present. Name collisions were checked explicitly: **SCOPE**
   (`2610.31518`, scene-graph TAMP data) collides with the listed [SCOPE](https://arxiv.org/abs/2608.15043) and
   is deferred for that reason as well as for its missing artifact.
 - **Revisions.** The `lastUpdatedDate` sweep for 2026-10-23 → 2026-10-25 returned zero records in all five
@@ -379,10 +378,10 @@ reachable from their sections instead.
   → present but no licence; `DeepCommit-ai/DeepCommit` → present, Apache-2.0, but it is the SWE-Milestone
   task-generation pipeline rather than the specification audit; UniFlowWAM, FocusVLA, SkeLAM and EpiSEM-Bench
   → no repository anywhere in record, full text, or project page.
-- **Duplicates:** all six included IDs and their titles grepped across `README.md`, `docs/`, and `sources/`
+- **Duplicates:** all nine included IDs and their titles grepped across `README.md`, `docs/`, and `sources/`
   before insertion; none present. `SCOPE` name collision handled explicitly (see Screening).
 - **Dates and categories:** each included ID's v1 date, latest version and primary category were re-read from
-  the harvest records and cross-checked against the README text; all six are still `v1`.
+  the harvest records and cross-checked against the README text; all nine are still `v1`.
 - **Cross-file consistency:** the README badge, the `## Current Landscape` "Last verified" line, and this
   record all carry **2026-10-25**; the scope statement here matches the previous record's stated debt
   (2026-10-23 onward).
@@ -393,8 +392,8 @@ reachable from their sections instead.
   2026-10-23, 2026-10-24 or 2026-10-25 on either date axis as of 2026-10-25 08:05 UTC, while 2026-10-22 is
   fully present and is also the newest record under an unrestricted descending sort. **The debt now passes to
   the next run: re-scan 2026-10-23 onward, and if the frontier is still 2026-10-22, re-screen that batch
-  again** — this run is evidence that repeat passes keep finding real misses (six this time, after twelve in
-  the previous run's tail re-screen).
+  again** — this run is evidence that repeat passes keep finding real misses (nine this time, six of them from
+  the unchanged batch alone, after twelve in the previous run's tail re-screen).
 - **HTTP 429 is about spacing, not volume.** Five category requests at 4 s spacing drew 15 consecutive 429s;
   the same requests at 18–20 s spacing all succeeded first try, including all ten tail re-screen requests.
   No mirror or proxy fallback was needed.
