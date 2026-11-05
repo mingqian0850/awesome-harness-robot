@@ -45,9 +45,9 @@
 
 ## Method
 
-- **Harvest (export API, HTTPS).** `https://export.arxiv.org/api/query`. **11 export-API requests**: one
-  `cs.RO` descending frontier probe, **six** per-day count queries (2026-11-01 → 2026-11-05, then 2026-10-31
-  against the previous run's harvest) and **five** full-day harvests at
+- **Harvest (export API, HTTPS).** `https://export.arxiv.org/api/query`. **12 export-API requests**: one
+  `cs.RO` descending frontier probe, **six** per-day count queries (2026-11-02 → 2026-11-05, then 2026-10-31 and
+  2026-11-01 against the previous run's harvest) and **five** full-day harvests at
   `max_results=2000&sortBy=submittedDate&sortOrder=ascending` returning **335 / 364 / 642 / 582 / 399**
   entries (813 KB / 907 KB / 1.60 MB / 1.42 MB / 997 KB). Spaced 3–5 s; **zero HTTP 429**.
 - **No re-download of the previous run's harvest was needed:** the untracked `.scratch/arxiv-2026-11-04/`
@@ -66,9 +66,11 @@
   replay|audit|guardrail|self-improv|workflow|serving|latency|deploy|contract); the remainder was read to
   confirm it is off-scope. (c) **40 abstracts** were read in full. (d) **12 full-text HTML renderings**
   (`arxiv.org/html/<id>v1`) were fetched for artifact claims and for disambiguation of citation-versus-release.
-  (e) Every claimed artifact was resolved at the source: **8 arXiv abstract pages**, **8 GitHub REST calls**,
-  **11 raw `README`/`LICENSE`/branch-file fetches**, **4 Hugging Face API calls** (dataset metadata and file
-  tree, two collections), **2 ModelScope checks** and **24 direct HTTP status checks**.
+  (e) Every claimed artifact was resolved at the source: **13 arXiv abstract pages** (eight candidates plus the
+  five revised records re-checked for artifact links), **8 GitHub REST calls** (seven repositories; one repeated
+  after a 504), **14 raw `README`/`LICENSE`/branch-file fetches**, **5 Hugging Face API calls** (dataset
+  metadata and file tree, two collections, one listing re-read), **2 ModelScope checks** and **24 direct HTTP
+  status checks**.
 - **Model papers remain excluded by rule**, even when they are the batch's headline results, unless the
   contribution is an external runtime, interface, or evaluation/optimization target. The rejections below name
   the ones that came closest.
